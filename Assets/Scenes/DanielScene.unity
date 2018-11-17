@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 281166973}
   - component: {fileID: 281166972}
   - component: {fileID: 281166971}
+  - component: {fileID: 281166976}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Player
@@ -355,9 +356,29 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 901485206}
+  - {fileID: 1331271752}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 105.481, z: 0}
+--- !u!114 &281166976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 281166970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780add7435d03e840afb9d8cdf6ffb40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atheistGrenadeBabyPrefab: {fileID: 1004574216448860, guid: 25f59cb488346ba469a7ef06c8bd89c5,
+    type: 2}
+  grenadeButton: Fire2
+  timer: 0
+  range: 0
+  speed: 3
+  damage: 0
+  grenadeSpawn: {fileID: 1331271752}
 --- !u!1 &901485205
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,3 +407,31 @@ Transform:
   m_Father: {fileID: 281166975}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1331271751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1331271752}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1331271752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1331271751}
+  m_LocalRotation: {x: 0, y: 0, z: -0.550641, w: 0.8347421}
+  m_LocalPosition: {x: -0.6499996, y: 0.68000007, z: -0.17999989}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 281166975}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -66.82201}

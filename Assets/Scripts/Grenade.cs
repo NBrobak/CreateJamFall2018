@@ -38,7 +38,7 @@ public class Grenade : MonoBehaviour {
             grenadeSpawn.rotation);
 
         // Add velocity to the baby
-        atheistGrenadeBaby.GetComponent<Rigidbody>().velocity = atheistGrenadeBaby.transform.forward * speed;
+        atheistGrenadeBaby.GetComponent<Rigidbody>().AddForce(new Vector3(30, 30, 0), ForceMode.Impulse);
 
         // Destroy the bullet after 2 seconds
         Destroy(atheistGrenadeBaby, 2.0f);
