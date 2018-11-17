@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Base : MonoBehaviour {
+	[SerializeField]
 	private int point = 0;
-
 	private struct StationaryBaby
 	{
 		public FollowerBaby followerBaby;
@@ -27,7 +27,13 @@ public class Base : MonoBehaviour {
 				this.point = value;
 		}
 	}
-	
+
+	public Player MasterBaby
+	{
+		get { return masterBaby; }
+		private set { masterBaby = value; }
+	}
+
 	// Use this for initialization
 	void Start () {
 		stationaryLoc = this.GetComponentsInChildren<Transform>();
