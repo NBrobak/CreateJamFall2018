@@ -6,16 +6,15 @@ public class Base : MonoBehaviour
 {
     [SerializeField]
     private int point = 0;
+    private bool isInSpawn = false;
+    private List<FollowerBaby> BabyScoreVisuals;
+
     private struct StationaryBaby
     {
-        public FollowerBaby followerBaby;
         public float xPos;
         public float yPos;
         public bool isOccupied;
     }
-
-    private Transform[] stationaryLoc;
-    private StationaryBaby[] stationaryBabiesPos;
 
     private Player masterBaby;
 
@@ -38,22 +37,20 @@ public class Base : MonoBehaviour
         set { masterBaby = value; }
     }
 
+    private StationaryBaby[] spawnPoints = new StationaryBaby[5];
+    private List<Vector3> spawnPointsVector3;
+
     // Use this for initialization
     void Start()
     {
-        stationaryLoc = this.gameObject.GetComponentsInChildren<Transform>();
-        Debug.Log("Array length: " + stationaryLoc.Length);
-        foreach (var item in stationaryLoc)
+        BabyScoreVisuals = new List<FollowerBaby>();
+        spawnPointsVector3 = new List<Vector3>();
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            Debug.Log(item.position);
-        }
-        stationaryBabiesPos = new StationaryBaby[stationaryLoc.Length - 1];
-
-        for (int i = 1; i < stationaryBabiesPos.Length; i++)
-        {
-            stationaryBabiesPos[i].xPos = stationaryLoc[i].position.x;
-            stationaryBabiesPos[i].yPos = stationaryLoc[i].position.z;
-            stationaryBabiesPos[i].isOccupied = false;
+            spawnPoints[i].xPos = this.gameObject.transform.GetChild(i).transform.position.x;
+            spawnPoints[i].yPos = this.gameObject.transform.GetChild(i).transform.position.z;
+            spawnPoints[i].isOccupied = false;
+            spawnPointsVector3.Add(new Vector3(spawnPoints[i].xPos, 1, spawnPoints[i].yPos));
         }
     }
 
@@ -70,31 +67,65 @@ public class Base : MonoBehaviour
 
     public void Allocate(List<FollowerBaby> babies)
     {
+        Debug.Log("Allocate method called");
         if (babies != null)
         {
-            point += babies.Count;
-            for (int i = 1; i < stationaryBabiesPos.Length; i++)
+            while (spawnPointsVector3.Count > 0)
             {
-                if (!stationaryBabiesPos[i].isOccupied && babies.Count != 0)
+                if (babies.Count > 0)
                 {
-                    stationaryBabiesPos[i].followerBaby = babies[0];
-                    babies[0].targetPos = new Vector3(stationaryBabiesPos[i].xPos, 1f, stationaryBabiesPos[i].yPos);
-                    babies[0].targetPos.y = 1f;
+                    GainPoint();
+                    BabyScoreVisuals.Add(babies[0]);
+                    int randomElement = Random.Range(0, spawnPointsVector3.Count - 1);
                     babies[0].isBased = true;
+                    babies[0].targetPos = spawnPointsVector3[randomElement];
+                    spawnPointsVector3.RemoveAt(randomElement);
                     babies.RemoveAt(0);
+                } else{
+                    break;
                 }
             }
-            if (babies.Count > 0)
-            {
+
+            if (babies.Count > 0){
                 foreach (var item in babies)
                 {
-                    Destroy(item);
+                    GainPoint();
+                    Destroy(item.gameObject);
                 }
             }
-            Debug.Log(babies.Count);
-
-            //babies.Clear();
+            
         }
+
+
+
+        //     if (babies != null)
+        //     {
+        //         point += babies.Count;
+        //         for (int i = 0; i < stationaryBabiesPos.Length; i++)
+        //         {
+        //             if (babies.Count != 0)
+        //             {
+        //                 if (!stationaryBabiesPos[i].isOccupied)
+        //                 {
+        //                     stationaryBabiesPos[i].followerBaby = babies[0];
+        //                     stationaryBabiesPos[i].isOccupied = true;
+        //                     babies[0].targetPos = new Vector3(stationaryBabiesPos[i].xPos, 1f, stationaryBabiesPos[i].yPos);
+        //                     babies[0].isBased = true;
+        //                     babies.RemoveAt(0);
+        //                 }
+        //             }
+        //         }
+        //         if (babies.Count > 0)
+        //         {
+        //             for (int i = 0; i < babies.Count; i++)
+        //             {
+        //                 babies[i].destroySelf();
+        //             }
+        //         }
+        //         Debug.Log(babies.Count);
+
+        //         //babies.Clear();
+        //     }
     }
 
     public void LosePoint()
@@ -111,7 +142,20 @@ public class Base : MonoBehaviour
         Player player = other.GetComponent<Player>();
         if (player != null && player == MasterBaby)
         {
-			Allocate(player.Babies);
+            if (isInSpawn == false)
+            {
+                isInSpawn = true;
+                Allocate(player.Babies);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Player player = other.GetComponent<Player>();
+        if (player != null && player == MasterBaby)
+        {
+            isInSpawn = false;
         }
     }
 }
