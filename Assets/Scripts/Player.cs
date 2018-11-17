@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
         }
         else
         { //max following
-            FollowBaby.targetTrans = Babies[Babies.Count-1].transform;
+            FollowBaby.targetTrans = Babies[Babies.Count-2].transform;
         }
         Debug.Log(Babies.Count);
         Destroy(preBaby);
