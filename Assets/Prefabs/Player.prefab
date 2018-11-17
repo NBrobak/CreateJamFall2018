@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1989162496640746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3093052, y: 1.58, z: -0.4937768}
+  m_LocalPosition: {x: -0.3093052, y: 1.58, z: -5.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c3cc6363b75cf4bab18530be210230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BabyFollowerPrefab: {fileID: 1038297973620126, guid: 78cab26e98fe7cc409ba5766bd75374c,
+  BabyFollowerPrefab: {fileID: 1247842701553524, guid: 78cab26e98fe7cc409ba5766bd75374c,
     type: 2}
   moveSpeed: 25
   reboundTime: 0.3
