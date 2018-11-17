@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Player : MonoBehaviour
 {
-	public static readonly int MAX_HEALTH = 5;
+	public static readonly int MAX_HEALTH = 3;
 
     //bullet variables
     public GameObject bulletPrefab;
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private string playerName;
 	public Color playerColor;
-    private int life = 5;
+    private int life;
 
     
 
@@ -114,6 +114,7 @@ public class Player : MonoBehaviour
         playersRigidbody = this.gameObject.GetComponent<Rigidbody>();
 		bulletTimer = -bulletCooldown;
 		grenadeTimer = -grenadeCooldown;
+		Life = MAX_HEALTH;
     }
 
     // Update is called once per frame
@@ -160,7 +161,7 @@ public class Player : MonoBehaviour
     {
 		for (int i = 0; i < babiesToDrop && Babies.Any(); i++)
 		{
-			FollowerBaby lastBaby = Babies.Last();
+			FollowerBaby lastBaby = Babies.First();
 			DropBaby(lastBaby);
 		}
 	}
@@ -169,7 +170,7 @@ public class Player : MonoBehaviour
 	{
 		Babies.Remove(baby);
 		SpawnController.Instance.SpawnBaby(baby.transform.position);
-		Destroy(baby);
+		Destroy(baby.gameObject);
 	}
 
 	private void DropAllBabies()

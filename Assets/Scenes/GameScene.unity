@@ -180,6 +180,15 @@ Prefab:
       propertyPath: playerColor.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 54451299676419298, guid: bb4054368f915104fb9d4760a028630a,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989162496640746, guid: bb4054368f915104fb9d4760a028630a, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4054368f915104fb9d4760a028630a, type: 2}
   m_IsPrefabAsset: 0
@@ -850,6 +859,15 @@ Prefab:
       propertyPath: playerName
       value: Player3
       objectReference: {fileID: 0}
+    - target: {fileID: 54451299676419298, guid: bb4054368f915104fb9d4760a028630a,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989162496640746, guid: bb4054368f915104fb9d4760a028630a, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4054368f915104fb9d4760a028630a, type: 2}
   m_IsPrefabAsset: 0
@@ -1121,6 +1139,15 @@ Prefab:
         type: 2}
       propertyPath: playerName
       value: Player4
+      objectReference: {fileID: 0}
+    - target: {fileID: 54451299676419298, guid: bb4054368f915104fb9d4760a028630a,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989162496640746, guid: bb4054368f915104fb9d4760a028630a, type: 2}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4054368f915104fb9d4760a028630a, type: 2}
@@ -1429,6 +1456,15 @@ Prefab:
         type: 2}
       propertyPath: playerColor.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54451299676419298, guid: bb4054368f915104fb9d4760a028630a,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989162496640746, guid: bb4054368f915104fb9d4760a028630a, type: 2}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4054368f915104fb9d4760a028630a, type: 2}
