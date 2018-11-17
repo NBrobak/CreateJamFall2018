@@ -29,9 +29,12 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float grenadeAngledForce = 5;
     public GameObject explisionParticleEffect;
-    public GameObject atheistGrenadeBaby;
-
+    private GameObject atheistGrenadeBaby;
+    public GameObject pentagram; 
     public FollowerBaby BabyFollowerPrefab;
+    private bool dontSpamCube=false;
+    private bool dontSpamEx = false;
+    private bool dontSpamPent = false;
 
 	//Player variables
     public float moveSpeed;
@@ -122,9 +125,11 @@ public class Player : MonoBehaviour
         //if the grenade button is pushed and the cooldown is neutral
         if (fireGrenade > 0 && Time.timeSinceLevelLoad - grenadeTimer > grenadeCooldown)
         {
+
             FireGrenade();
-            StartCoroutine(Example());
+           
         }
+        
     }
 
     public void ConvertBaby(GameObject preBaby)
@@ -191,32 +196,56 @@ public class Player : MonoBehaviour
     }
     private void FireGrenade()
     {
-		grenadeTimer = Time.timeSinceLevelLoad;
+        if(dontSpamPent == false)
+        {
+            dontSpamPent = true;
+            StartCoroutine(SendChildGrenade());
+        }
+
+    }
+    
+    IEnumerator GreenBoom()
+    {
+        Debug.Log("Starts wait SECOND");
+        yield return new WaitForSecondsRealtime(1.8f);
+        Debug.Log("Ends wait SECOND");
+
+        if (explisionParticleEffect) Debug.Log("1");
+        if (atheistGrenadeBaby) Debug.Log("2");
+        if (atheistGrenadeBabyPrefab) Debug.Log("3");
+        GameObject temp2 = Instantiate(explisionParticleEffect, atheistGrenadeBaby.transform.position, atheistGrenadeBabyPrefab.transform.rotation);
+        Destroy(temp2, 4f) ;
+    }
+    IEnumerator SendChildGrenade()
+    {
+        Debug.Log("Starts wait FIRST");
+        yield return new WaitForSecondsRealtime(0.5f);
+        Debug.Log("Ends wait FIRST");
+        
+
+
+        grenadeTimer = Time.timeSinceLevelLoad;
         atheistGrenadeBaby = Instantiate(
             atheistGrenadeBabyPrefab,
             grenadeSpawn.position,
             grenadeSpawn.rotation);
+        StartCoroutine(GreenBoom());
 
         // Add velocity to the baby
-        atheistGrenadeBaby.GetComponent<Rigidbody>().velocity = 
-			transform.forward * grenadeSpeed + transform.up * grenadeAngledForce;
+        atheistGrenadeBaby.GetComponent<Rigidbody>().velocity =
+            transform.forward * grenadeSpeed + transform.up * grenadeAngledForce;
 
-		Physics.IgnoreCollision(atheistGrenadeBaby.GetComponent<Collider>(), GetComponent<Collider>(), true);
-
+        Physics.IgnoreCollision(atheistGrenadeBaby.GetComponent<Collider>(), GetComponent<Collider>(), true);
         // Destroy the bullet after 2 seconds
-        
+        GameObject temp = Instantiate(pentagram, grenadeSpawn.transform);
+        temp.transform.SetParent(this.gameObject.transform);
         
         Destroy(atheistGrenadeBaby, 2.0f);
+        Destroy(temp, 2.0f);
         
+        dontSpamPent = false;
     }
-    
-    IEnumerator Example()
-    {
-        
-        yield return new WaitForSeconds(1.8f);
-        Instantiate(explisionParticleEffect, atheistGrenadeBaby.transform.position,atheistGrenadeBabyPrefab.transform.rotation);
-        
-    }
+
 
 
 }
