@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Base : MonoBehaviour {
-/*************/
-/* Variables */
-/*************/
-	private int point;
-	//struct med baby obj med xy floats
+	private int point = 0;
+
 	private struct StationaryBaby
 	{
-		public GameObject baby;
+		public FollowerBaby followerBaby;
 		public float xPos;
 		public float yPos;
+		public bool isOccupied;
 	}
-	private StationaryBaby[] stationaryLoc;
+
+	private Transform[] stationaryLoc;
+	private StationaryBaby[] stationaryBabiesPos;
+
 	private Player masterBaby;
-/**************/
-/* Properties */
-/**************/
+
 	public int Point{
 		get{
 			return this.point;
@@ -31,34 +30,49 @@ public class Base : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		stationaryLoc = new StationaryBaby[5];
-		for (int i = 0; i < stationaryLoc.Length; i++)
+		stationaryLoc = this.GetComponentsInChildren<Transform>();
+		stationaryBabiesPos = new StationaryBaby[stationaryLoc.Length];
+
+		for (int i = 0; i < stationaryBabiesPos.Length; i++)
 		{
-			stationaryLoc[i].baby = null;
-			stationaryLoc[i].xPos = this.transform.GetChild(0).GetComponent<Transform>().position.x;
-			stationaryLoc[i].yPos = 0;
+			stationaryBabiesPos[i].xPos = stationaryLoc[i].position.x;
+			stationaryBabiesPos[i].yPos = stationaryLoc[i].position.z;
+			stationaryBabiesPos[i].isOccupied = false;
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-		
 	}
 
-
-/*************/
-/* Functions */
-/*************/
 	public void Respawn(){
 
 	}
 	public void Allocate(List<FollowerBaby> babies){
 		if(babies != null){
-			for(int i = 0; i < 4; i++){
-				if(stationaryLoc[i].baby == null){
-					
+			point += babies.Count;
+			//int babiesForBase = babies.Count < stationaryBabiesPos.Length ? babies.Count : stationaryBabiesPos.Length;
+				for(int i = 0; i < stationaryBabiesPos.Length; i++){
+					if(!stationaryBabiesPos[i].isOccupied && babies.Count != 0){
+						stationaryBabiesPos[i].followerBaby = babies[0];
+						babies[0].targetPos.x = stationaryBabiesPos[i].xPos;
+						babies[0].targetPos.z = stationaryBabiesPos[i].yPos;
+						babies[0].targetPos.y = 0f;
+						babies.RemoveAt(0);
+					}
 				}
+				//plads til babyer
+				//så hvis er baby i pos, gå til næste, osv.
+				//første element fra babies i statbaepos.
+				//remove elementet trukket hen til pos.
+				//tilføj point for alle
+			for(int i = 0; i < stationaryLoc.Length; i++)
+			{
+				
+				//har baby i sig?
+				//har plads, læg deri og giv target pos
+				//giv point
+				//eller kun giv point
 			}
 		}
 	}

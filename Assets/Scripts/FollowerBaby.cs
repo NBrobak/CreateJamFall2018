@@ -5,13 +5,13 @@ using UnityEngine;
 public class FollowerBaby : MonoBehaviour
 {
     Transform player;
+    public bool isbased;
+	public Vector3 targetPos;
+
     public Transform Player
     {
         get; set;
     }
-    public bool isbased;
-	public Vector3 targetPos;
-
     // Use this for initialization
     void Start()
     {
