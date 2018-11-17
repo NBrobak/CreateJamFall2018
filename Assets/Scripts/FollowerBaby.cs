@@ -5,13 +5,14 @@ using UnityEngine;
 public class FollowerBaby : MonoBehaviour
 {
     Transform player;
-    public bool isbased;
-	public Vector3 targetPos;
-
+    public bool isBased;
+    public Vector3 targetPos;
     public Transform Player
     {
         get; set;
     }
+
+
     // Use this for initialization
     void Start()
     {
@@ -21,12 +22,24 @@ public class FollowerBaby : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player)
+        if (!isBased)
         {
-            moveTowardsPlayer();
+            if (player)
+            {
+                moveTowardsPlayer();
+            }
         }
+        else
+        {
+            moveTowardsTarget();
+        }
+
     }
     void moveTowardsPlayer()
+    {
+
+    }
+    void moveTowardsTarget()
     {
 
     }
