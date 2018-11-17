@@ -73,8 +73,11 @@ public class Player : MonoBehaviour
         }
         Move();
 
-
-
+        //if the button is down(==1) call the function FireShot()
+        if (fireShot == 1)
+        {
+            FireShot();
+        }
 
 
     }
