@@ -286,10 +286,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3a226acb6da9a4890487ce4c29128f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootButton: Fire1
   bulletPrefab: {fileID: 1004574216448860, guid: 25f59cb488346ba469a7ef06c8bd89c5,
     type: 2}
   bulletSpawn: {fileID: 901485206}
-  sec: 1.5
 --- !u!135 &281166972
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -10,10 +10,10 @@ public class Shot : MonoBehaviour {
     public Transform bulletSpawn;
     private GameObject bullet;
     private float bulletSpeed = 6.0f;
-    public float sec = 1f;
+    
     // Use this for initialization
     void Start () {
-        gameObject.SetActive(true);
+        
 	}
 
     // Update is called once per frame
