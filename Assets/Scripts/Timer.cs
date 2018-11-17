@@ -52,5 +52,6 @@ public class Timer : MonoBehaviour {
 			notifyOfEndedGame.Invoke();
 		}
 		gameObject.SetActive(false);
+		SpawnController.Instance.StopSpawning();
 	}
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Base : MonoBehaviour
 {
+	[SerializeField]
+	private float respawnTime = 2;
     [SerializeField]
     private int point = 0;
     private bool isInSpawn = false;
@@ -40,7 +42,6 @@ public class Base : MonoBehaviour
     private StationaryBaby[] spawnPoints = new StationaryBaby[5];
     private List<Vector3> spawnPointsVector3;
 
-    // Use this for initialization
     void Start()
     {
         BabyScoreVisuals = new List<FollowerBaby>();
@@ -54,16 +55,19 @@ public class Base : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Respawn()
     {
-        masterBaby.gameObject.transform.position = this.gameObject.transform.position;
+        masterBaby.transform.position = transform.position;
+		masterBaby.Life = Player.MAX_HEALTH;
+		masterBaby.enabled = false;
+		StartCoroutine(ReactivatePlayer());
     }
+
+	private IEnumerator ReactivatePlayer()
+	{
+		yield return new WaitForSeconds(respawnTime);
+		masterBaby.enabled = true;
+	}
 
     public void Allocate(List<FollowerBaby> babies)
     {
@@ -97,48 +101,9 @@ public class Base : MonoBehaviour
                     Destroy(temp.gameObject);
                     GainPoint();
                 }
-
-
-
-                // foreach (var item in babies)
-                // {
-                //     GainPoint();
-                //     Destroy(item.gameObject);
-                // }
             }
 
         }
-
-
-
-        //     if (babies != null)
-        //     {
-        //         point += babies.Count;
-        //         for (int i = 0; i < stationaryBabiesPos.Length; i++)
-        //         {
-        //             if (babies.Count != 0)
-        //             {
-        //                 if (!stationaryBabiesPos[i].isOccupied)
-        //                 {
-        //                     stationaryBabiesPos[i].followerBaby = babies[0];
-        //                     stationaryBabiesPos[i].isOccupied = true;
-        //                     babies[0].targetPos = new Vector3(stationaryBabiesPos[i].xPos, 1f, stationaryBabiesPos[i].yPos);
-        //                     babies[0].isBased = true;
-        //                     babies.RemoveAt(0);
-        //                 }
-        //             }
-        //         }
-        //         if (babies.Count > 0)
-        //         {
-        //             for (int i = 0; i < babies.Count; i++)
-        //             {
-        //                 babies[i].destroySelf();
-        //             }
-        //         }
-        //         Debug.Log(babies.Count);
-
-        //         //babies.Clear();
-        //     }
     }
 
     public void LosePoint()
@@ -152,23 +117,13 @@ public class Base : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Player player = other.GetComponent<Player>();
-        if (player != null && player == MasterBaby)
-        {
-            if (isInSpawn == false)
-            {
-                isInSpawn = true;
-                Allocate(player.Babies);
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Player player = other.GetComponent<Player>();
-        if (player != null && player == MasterBaby)
-        {
-            isInSpawn = false;
-        }
+		if (other.CompareTag("Player"))
+		{
+			Player player = other.GetComponent<Player>();
+			if (player == MasterBaby)
+			{
+				Allocate(player.Babies);
+			}
+		}
     }
 }

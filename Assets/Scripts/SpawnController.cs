@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour {
 
+	private static SpawnController instance;
+
+	public static SpawnController Instance
+	{
+		get { return instance; }
+		private set { instance = value; }
+	}
+
 	public bool spawnOnStart = true;
 	public float timeBetweenSpawns = 1;
 	public List<Transform> spawnPositions;
@@ -12,6 +20,11 @@ public class SpawnController : MonoBehaviour {
 	private AtheistBaby atheistBabyPrefab;
 
 	private bool isSpawning;
+
+	private void Awake()
+	{
+		Instance = this;
+	}
 
 	private void Start()
 	{
@@ -49,7 +62,7 @@ public class SpawnController : MonoBehaviour {
 		SpawnBaby(spawnPosition.position);
 	}
 
-	private void SpawnBaby(Vector3 position)
+	public void SpawnBaby(Vector3 position)
 	{
 		AtheistBaby spawnedBaby = Instantiate(atheistBabyPrefab);
 		spawnedBaby.transform.position = position;
