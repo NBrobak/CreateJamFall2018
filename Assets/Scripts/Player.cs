@@ -28,8 +28,10 @@ public class Player : MonoBehaviour
 	private float grenadeSpeed = 10;
 	[SerializeField]
 	private float grenadeAngledForce = 5;
+    public GameObject explisionParticleEffect;
+    public GameObject atheistGrenadeBaby;
 
-	public FollowerBaby BabyFollowerPrefab;
+    public FollowerBaby BabyFollowerPrefab;
 
 	//Player variables
     public float moveSpeed;
@@ -121,6 +123,7 @@ public class Player : MonoBehaviour
         if (fireGrenade > 0 && Time.timeSinceLevelLoad - grenadeTimer > grenadeCooldown)
         {
             FireGrenade();
+            StartCoroutine(Example());
         }
     }
 
@@ -189,7 +192,7 @@ public class Player : MonoBehaviour
     private void FireGrenade()
     {
 		grenadeTimer = Time.timeSinceLevelLoad;
-        GameObject atheistGrenadeBaby = Instantiate(
+        atheistGrenadeBaby = Instantiate(
             atheistGrenadeBabyPrefab,
             grenadeSpawn.position,
             grenadeSpawn.rotation);
@@ -200,7 +203,19 @@ public class Player : MonoBehaviour
 
 		Physics.IgnoreCollision(atheistGrenadeBaby.GetComponent<Collider>(), GetComponent<Collider>(), true);
 
-		// Destroy the bullet after 2 seconds
-		Destroy(atheistGrenadeBaby, 2.0f);
+        // Destroy the bullet after 2 seconds
+        
+        
+        Destroy(atheistGrenadeBaby, 2.0f);
+        
     }
+    IEnumerator Example()
+    {
+        
+        yield return new WaitForSeconds(1.8f);
+        Instantiate(explisionParticleEffect, atheistGrenadeBaby.transform.position,atheistGrenadeBabyPrefab.transform.rotation);
+        
+    }
+
+
 }
