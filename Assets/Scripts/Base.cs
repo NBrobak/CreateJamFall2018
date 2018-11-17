@@ -6,6 +6,7 @@ public class Base : MonoBehaviour {
 /*************/
 /* Variables */
 /*************/
+	[SerializeField]
 	private int point;
 	//struct med baby obj med xy floats
 	private struct StationaryBaby
@@ -28,7 +29,13 @@ public class Base : MonoBehaviour {
 				this.point = value;
 		}
 	}
-	
+
+	public Player MasterBaby
+	{
+		get { return masterBaby; }
+		private set { masterBaby = value; }
+	}
+
 	// Use this for initialization
 	void Start () {
 		stationaryLoc = new StationaryBaby[5];
