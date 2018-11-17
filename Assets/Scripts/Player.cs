@@ -101,6 +101,7 @@ public class Player : MonoBehaviour
         Babies = new List<FollowerBaby>();
         personalBase = GameObject.Find("Base" + PlayerName).GetComponent<Base>();
         if (!personalBase.name.Contains("Base")) Debug.Log(PlayerName + ". Couldn't find this Player's personal base");
+		personalBase.MasterBaby = this;
         playersRigidbody = this.gameObject.GetComponent<Rigidbody>();
 		bulletTimer = -bulletCooldown;
 		grenadeTimer = -grenadeCooldown;

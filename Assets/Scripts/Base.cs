@@ -35,7 +35,7 @@ public class Base : MonoBehaviour
     public Player MasterBaby
     {
         get { return masterBaby; }
-        private set { masterBaby = value; }
+        set { masterBaby = value; }
     }
 
     // Use this for initialization
@@ -108,13 +108,10 @@ public class Base : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Contains("Player"))
+        Player player = other.GetComponent<Player>();
+        if (player != null && player == MasterBaby)
         {
-            Player player = other.gameObject.GetComponent<Player>();
-            if (this.gameObject.name.Contains(player.PlayerName))
-            {
-                Allocate(player.Babies);
-            }
+			Allocate(player.Babies);
         }
     }
 }
