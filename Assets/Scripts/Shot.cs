@@ -15,7 +15,7 @@ public class Shot : MonoBehaviour {
     private string newFireShot;
     // Use this for initialization
     void Start () {
-        this.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
     }
 
     // Update is called once per frame
