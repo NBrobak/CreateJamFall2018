@@ -22,14 +22,15 @@ public class Player : MonoBehaviour
     private Animator animator;
     public Transform grenadeSpawn;
 
-    public GameObject BabyFollowerPrefab;
+    public FollowerBaby BabyFollowerPrefab;
     public float moveSpeed;
     public float reboundTime = 0.3f;
     public string playerName;
 	public Color playerColor;
     private int life = 5;
 
-    private List<FollowerBaby> Babies;
+    [HideInInspector]
+    public List<FollowerBaby> Babies;
     private float cooldown;
     private Base personalBase;
     private Rigidbody playersRigidbody;
@@ -125,19 +126,19 @@ public class Player : MonoBehaviour
         }
 
 
-        Debug.Log(fireShot);
+        // Debug.Log(fireShot);
     }
 
     public void ConvertBaby(GameObject preBaby)
     {
         Debug.Log("Converted Baby");
-        GameObject FollowBaby = Instantiate(BabyFollowerPrefab);
-        FollowBaby.GetComponent<FollowerBaby>().Player = this.GetComponent<Player>().transform;
+        FollowerBaby FollowBaby = Instantiate(BabyFollowerPrefab);
+        FollowBaby.player = this;
 
         Debug.Log(playerName + " hit the baby");
         FollowBaby.GetComponent<Renderer>().material.color = playerColor;
 
-        Babies.Add(FollowBaby.GetComponent<FollowerBaby>());
+        Babies.Add(FollowBaby);
         Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
         Debug.Log(Babies.Count);
         Destroy(preBaby);

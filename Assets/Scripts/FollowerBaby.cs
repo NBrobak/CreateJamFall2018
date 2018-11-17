@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class FollowerBaby : MonoBehaviour
 {
-    Transform player;
+
     public bool isBased = false;
     public Vector3 targetPos;
-	public float moveSpeed = 5f;
-    public Transform Player
+    public float moveSpeed = 5f;
+    public Player player
     {
         get; set;
     }
@@ -25,10 +25,7 @@ public class FollowerBaby : MonoBehaviour
     {
         if (!isBased)
         {
-            if (player)
-            {
-                moveTowardsPlayer();
-            }
+            moveTowardsPlayer();
         }
         else
         {
@@ -37,8 +34,10 @@ public class FollowerBaby : MonoBehaviour
     }
     void moveTowardsPlayer()
     {
-		Debug.Log("Moving towards player");
-		Vector3.MoveTowards(transform.position, Player.transform.position, moveSpeed);
+        Debug.Log("Moving towards player");
+		Debug.Log(player);
+		Vector3 targetPos = player.
+        transform.position = Vector3.Lerp(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
     }
     void moveTowardsTarget()
     {
