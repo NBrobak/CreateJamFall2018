@@ -5,6 +5,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //bullet variables
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
+    private GameObject bullet;
+    private float bulletSpeed = 6.0f;
+
+
+    //grenade Variables
+    public GameObject atheistGrenadeBabyPrefab;
+    private GameObject atheistGrenadeBaby;
+    public float timer;
+    public float range;
+    public float speed=3.0f;
+    public float damage;
+    private Animator animator;
+    public Transform grenadeSpawn;
+
     public GameObject BabyFollowerPrefab;
     public float moveSpeed;
     public float reboundTime = 0.3f;
@@ -63,6 +80,20 @@ public class Player : MonoBehaviour
             KillPlayer();
         }
         Move();
+
+        //if the button is down(==1) call the function FireShot()
+        if (fireShot == 1)
+        {
+            FireShot();
+        }
+        //if the grenade button is pushed and the cooldown is neutral
+        if (fireGrenade == 1 && timer == 0)
+        {
+            FireGrenade();
+            //being cooldown timer
+        }
+
+
         Debug.Log(fireShot);
     }
 
@@ -122,12 +153,31 @@ public class Player : MonoBehaviour
     }
     private void FireShot()
     {
+        // Create the Bullet from the Bullet Prefab
+        bullet = (GameObject)Instantiate(
+            bulletPrefab,
+            bulletSpawn.position,
+            bulletSpawn.rotation);
 
-        //creates a shot object with direction
+        // Add velocity to the bullet
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
+
+        // Destroy the bullet after 2 seconds
+        Destroy(bullet, 2.0f);
+        
     }
     private void FireGrenade()
     {
+        atheistGrenadeBaby = (GameObject)Instantiate(
+            atheistGrenadeBabyPrefab,
+            grenadeSpawn.position,
+            grenadeSpawn.rotation);
 
-        //creates a grenade object with calculated target
+        // Add velocity to the baby
+        atheistGrenadeBaby.GetComponent<Rigidbody>().AddForce(new Vector3(5, 5, 0), ForceMode.Impulse);
+
+        // Destroy the bullet after 2 seconds
+        Destroy(atheistGrenadeBaby, 2.0f);
+        
     }
 }
