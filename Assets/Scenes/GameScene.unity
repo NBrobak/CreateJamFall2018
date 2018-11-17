@@ -1189,11 +1189,6 @@ Prefab:
       propertyPath: playerBases.Array.data[3]
       value: 
       objectReference: {fileID: 678825982}
-    - target: {fileID: 114625159817844114, guid: 58d4ea18fd3a35b43919c9cc3f83fd3d,
-        type: 2}
-      propertyPath: winTextSizeFactor
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58d4ea18fd3a35b43919c9cc3f83fd3d, type: 2}
   m_IsPrefabAsset: 0
@@ -1599,11 +1594,6 @@ Prefab:
         type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114249611991618294, guid: af19534bed56ba14d8ce006a00920807,
-        type: 2}
-      propertyPath: gameTime
-      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af19534bed56ba14d8ce006a00920807, type: 2}

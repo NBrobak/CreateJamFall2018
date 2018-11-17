@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
+	public static readonly int MAX_HEALTH = 5;
+
     //bullet variables
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
@@ -151,27 +153,42 @@ public class Player : MonoBehaviour
         Debug.Log(Babies.Count);
         Destroy(preBaby);
     }
-    public void DropBaby()
+    public void DropBabies(int babiesToDrop)
     {
-        //take list of Babies, if length of list over 0, drop random baby
-        if (Babies.Count > 0)
-        {
-            Babies.RemoveAt(Random.Range(0, Babies.Count - 1));
-            Life--;
-        }
-    }
-    private void DropAllBabies()
+		for (int i = 0; i < babiesToDrop && Babies.Any(); i++)
+		{
+			FollowerBaby lastBaby = Babies.Last();
+			DropBaby(lastBaby);
+		}
+	}
+
+	private void DropBaby(FollowerBaby baby)
+	{
+		Babies.Remove(baby);
+		SpawnController.Instance.SpawnBaby(baby.transform.position);
+		Destroy(baby);
+	}
+
+	private void DropAllBabies()
     {
-        //called from DieFunction of this player
-        //animation called here
-        Babies.Clear();
+		foreach (FollowerBaby baby in Babies.ToList())
+		{
+			DropBaby(baby);
+		}
     }
+
+	public void TakeDamage(int damage)
+	{
+		DropBabies(damage);
+		Life -= damage;
+	}
+
     private void KillPlayer()
     {
         DropAllBabies();
-        //personalBase.respawn(); //not implemented yet
-        //called from update when life is below 0
+        personalBase.Respawn();
     }
+
     private void Move()
     {
         //take input, go to target position

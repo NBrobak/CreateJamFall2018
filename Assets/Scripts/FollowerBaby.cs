@@ -54,4 +54,7 @@ public class FollowerBaby : MonoBehaviour
         }
 
     }
+	public void destroySelf(){
+		Destroy(this);
+	}
 }

@@ -4,25 +4,16 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour {
   
+	[SerializeField]
+	private int damage = 1;
 
-    
-    // Use this for initialization
-    void Start () {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-      
-
-        
-    }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Destroy(gameObject);
-    }
-
+	private void OnTriggerEnter(Collider collider)
+	{
+		Destroy(gameObject);
+		if (collider.CompareTag("Player"))
+		{
+			Player player = collider.GetComponent<Player>();
+			player.TakeDamage(damage);
+		}
+	}
 }

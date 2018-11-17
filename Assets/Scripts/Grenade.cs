@@ -9,7 +9,7 @@ public class Grenade : MonoBehaviour {
     public float timer;
     public float range;
     public float speed;
-    public float damage;
+    public int damage;
     private Animator animator;
     public Transform grenadeSpawn;
 
