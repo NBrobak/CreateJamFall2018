@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     private bool dontSpamCube=false;
     private bool dontSpamEx = false;
     private bool dontSpamPent = false;
+    public GameObject deSpawnSmoke;
+
 
 	//Player variables
     public float moveSpeed;
@@ -45,9 +47,6 @@ public class Player : MonoBehaviour
 	public Color playerColor;
     private int life;
 
-    
-
-    [HideInInspector]
     public List<FollowerBaby> Babies;
     private Base personalBase;
     private Rigidbody playersRigidbody;
@@ -131,32 +130,34 @@ public class Player : MonoBehaviour
         //if the grenade button is pushed and the cooldown is neutral
         if (fireGrenade > 0 && Time.timeSinceLevelLoad - grenadeTimer > grenadeCooldown)
         {
-
-            FireGrenade();
-           
+            if (Babies.Count > 0)
+            {
+                FireGrenade();
+            }
         }
 
-        //animator.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
+        animator.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
     }
 
     public void ConvertBaby(GameObject preBaby)
     {
-        Debug.Log("Converted Baby");
         FollowerBaby FollowBaby = Instantiate(BabyFollowerPrefab);
 
         Debug.Log(PlayerName + " hit the baby");
-        FollowBaby.GetComponent<Renderer>().material.color = playerColor;
-
-        Babies.Add(FollowBaby);
-        Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
-
-        FollowBaby.TargetTrans = transform;
-        if (Babies.Count > 1)
+        if (FollowBaby)
         {
-            Babies[Babies.Count-2].TargetTrans = FollowBaby.transform;
+            FollowBaby.GetComponent<Renderer>().material.color = playerColor;
+
+            Babies.Add(FollowBaby);
+            Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
+
+            FollowBaby.TargetTrans = transform;
+            if (Babies.Count > 1)
+            {
+                Babies[Babies.Count - 2].TargetTrans = FollowBaby.transform;
+            }
+            Destroy(preBaby);
         }
-        Debug.Log(Babies.Count);
-        Destroy(preBaby);
     }
     public void DropBabies(int babiesToDrop)
     {
@@ -218,8 +219,10 @@ public class Player : MonoBehaviour
     }
     private void FireGrenade()
     {
+
         if(dontSpamPent == false)
         {
+
             dontSpamPent = true;
             StartCoroutine(SendChildGrenade());
         }
@@ -228,23 +231,23 @@ public class Player : MonoBehaviour
     
     IEnumerator GreenBoom()
     {
-        Debug.Log("Starts wait SECOND");
         yield return new WaitForSecondsRealtime(1.8f);
-        Debug.Log("Ends wait SECOND");
-
-        if (explisionParticleEffect) Debug.Log("1");
-        if (atheistGrenadeBaby) Debug.Log("2");
-        if (atheistGrenadeBabyPrefab) Debug.Log("3");
         GameObject temp2 = Instantiate(explisionParticleEffect, atheistGrenadeBaby.transform.position, atheistGrenadeBabyPrefab.transform.rotation);
         Destroy(temp2, 4f) ;
     }
     IEnumerator SendChildGrenade()
     {
-        Debug.Log("Starts wait FIRST");
-        yield return new WaitForSecondsRealtime(0.5f);
-        Debug.Log("Ends wait FIRST");
-        
-
+        FollowerBaby despawnedChild = Babies[0];
+        Babies.RemoveAt(0);
+        if (despawnedChild)
+        {
+            GameObject despawnParticleEffect = Instantiate(deSpawnSmoke, despawnedChild.transform);
+            despawnParticleEffect.transform.position = new Vector3(despawnParticleEffect.transform.position.x, 0f, despawnParticleEffect.transform.position.z);
+            Destroy(despawnParticleEffect, 1f);
+            Destroy(despawnedChild.gameObject, 1f);
+        }
+ 
+        yield return new WaitForSecondsRealtime(1f);
 
         grenadeTimer = Time.timeSinceLevelLoad;
         atheistGrenadeBaby = Instantiate(

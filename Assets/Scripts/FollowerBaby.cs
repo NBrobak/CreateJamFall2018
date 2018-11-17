@@ -34,8 +34,11 @@ public class FollowerBaby : MonoBehaviour
         }
         else
         {
-			Vector3 temp = TargetTrans.position - (TargetTrans.position - transform.position).normalized * displacement;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(temp.x, transform.position.y, temp.z), moveSpeed * Time.deltaTime);
+            if (TargetTrans)
+            {
+                Vector3 temp = TargetTrans.position - (TargetTrans.position - transform.position).normalized * displacement;
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(temp.x, transform.position.y, temp.z), moveSpeed * Time.deltaTime);
+            }
         }
     }
 
