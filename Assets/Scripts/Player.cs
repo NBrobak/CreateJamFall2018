@@ -5,20 +5,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	public GameObject BabyFollowerPrefab;
-	public float moveSpeed;
+    public GameObject BabyFollowerPrefab;
+    public float moveSpeed;
+    public float reboundTime = 0.3f;
     private float moveX;
     private float moveY;
     private float aimX;
     private float aimY;
     private float fireShot;
     private float fireGrenade;
-    private string playerName;
+    public string playerName;
     private int life = 5;
 
     private List<FollowerBaby> Babies;
     private float cooldown;
     private Base personalBase;
+    private Rigidbody playersRigidbody;
+
 
     private float Cooldown
     {
@@ -49,31 +52,39 @@ public class Player : MonoBehaviour
 
         personalBase = GameObject.Find("Base" + playerName).GetComponent<Base>();
         if (!personalBase.name.Contains("Base")) Debug.Log(playerName + ". Couldn't find this Player's personal base");
+        playersRigidbody = this.gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         SetInputs();    //sets controller inputs based on PlayerName
-		if(life <= 0){
-			KillPlayer();
-		}
+        if (life <= 0)
+        {
+            KillPlayer();
+        }
+        Move();
+
     }
 
     private void SetInputs()
     {
-        moveX = Input.GetAxis("HorizontalMove" + playerName);
-        moveY = Input.GetAxis("VerticalMove" + playerName);
-        aimX = Input.GetAxis("HorizontalAim" + playerName);
-        aimY = Input.GetAxis("VerticalAim" + playerName);
-        fireGrenade = Input.GetAxis("FireGrenade" + playerName);
-        fireShot = Input.GetAxis("FireShot" + playerName);
+        moveX = Input.GetAxisRaw("HorizontalMove" + playerName);
+        moveY = Input.GetAxisRaw("VerticalMove" + playerName);
+        aimX = Input.GetAxisRaw("HorizontalAim" + playerName);
+        aimY = Input.GetAxisRaw("VerticalAim" + playerName);
+        fireGrenade = Input.GetAxisRaw("FireGrenade" + playerName);
+        fireShot = Input.GetAxisRaw("FireShot" + playerName);
+    }
+    void FixedUpdate()
+    {
+        
     }
     private void ConvertBaby(AtheistBaby preBaby)
     {
-		Babies.Add(Instantiate(BabyFollowerPrefab).GetComponent<FollowerBaby>());
-		Babies[Babies.Count-1].transform.position = preBaby.transform.position;
-		Destroy(preBaby.gameObject);
+        Babies.Add(Instantiate(BabyFollowerPrefab).GetComponent<FollowerBaby>());
+        Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
+        Destroy(preBaby.gameObject);
     }
     public void DropBaby()
     {
@@ -81,7 +92,7 @@ public class Player : MonoBehaviour
         if (Babies.Count > 0)
         {
             Babies.RemoveAt(Random.Range(0, Babies.Count - 1));
-			life--;
+            life--;
         }
     }
     private void DropAllBabies()
@@ -99,7 +110,7 @@ public class Player : MonoBehaviour
     private void Move()
     {
         //take input, lerp between current position and target position
-        transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(moveX, 0f, moveY), moveSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(moveX * moveSpeed, 0f, moveY * moveSpeed), reboundTime * Time.deltaTime);
     }
     private Vector3 AimDirection()
     {
