@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
            
         }
 
-        animator.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
+        //animator.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
     }
 
     public void ConvertBaby(GameObject preBaby)
@@ -149,10 +149,10 @@ public class Player : MonoBehaviour
         Babies.Add(FollowBaby);
         Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
 
-        FollowBaby.targetTrans = this.transform;
+        FollowBaby.TargetTrans = transform;
         if (Babies.Count > 1)
-        { //max following
-            Babies[Babies.Count-2].targetTrans = FollowBaby.transform;
+        {
+            Babies[Babies.Count-2].TargetTrans = FollowBaby.transform;
         }
         Debug.Log(Babies.Count);
         Destroy(preBaby);

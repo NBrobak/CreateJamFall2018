@@ -1,60 +1,55 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class FollowerBaby : MonoBehaviour
 {
 
     public bool isBased = false;
-    // public Vector3 targetPos;
     public float moveSpeed = 5f;
     public float displacement = 5f;
-    public Transform targetTrans;
     public Vector3 targetPos;
+	public Action onArrivalAtBase;
 
     public Transform TargetTrans
     {
-        get
-        {
-            return this.targetTrans;
-        }
-        set
-        {
-            this.targetTrans = value;
-        }
+        get; set;
     }
 
-    // Use this for initialization
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        moveTowardsTarget();
+        MoveTowardsTarget();
     }
-    // void moveTowardsPlayer()
-    // {
-    //     Debug.Log("Moving towards player");
-    //     //Debug.Log(player);
-    //     Vector3 targetPos = (player.transform.position - transform.position) - transform.forward * displacement;
-    //     transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
-    // }
-    void moveTowardsTarget()
+
+    private void MoveTowardsTarget()
     {
         if (isBased)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+			if(transform.position == targetPos)
+			{
+				onArrivalAtBase();
+			}
         }
         else
         {
-			Vector3 temp = targetTrans.position - (targetTrans.position - transform.position).normalized * displacement;
+			Vector3 temp = TargetTrans.position - (TargetTrans.position - transform.position).normalized * displacement;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(temp.x, transform.position.y, temp.z), moveSpeed * Time.deltaTime);
         }
-
     }
-	public void destroySelf(){
-		Destroy(this);
+
+	public void MoveToBase(Vector3 positionInBase, bool stay)
+	{
+		isBased = true;
+		targetPos = positionInBase;
+		if (stay)
+		{
+			onArrivalAtBase += () => { enabled = false; Destroy(GetComponent<Rigidbody>()); };
+		}
+		else
+		{
+			onArrivalAtBase += () => Destroy(gameObject);
+		}
 	}
 }
