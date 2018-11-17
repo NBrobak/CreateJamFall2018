@@ -51,6 +51,7 @@ public class Base : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void Respawn()
@@ -85,5 +86,14 @@ public class Base : MonoBehaviour {
 	public void GainPoint()
 	{
 		point++;
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		Player player = other.gameObject.GetComponent<Player>();
+		if(this.gameObject.name.Contains(player.playerName))
+		{
+			Allocate(player.Babies);
+		}
 	}
 }
