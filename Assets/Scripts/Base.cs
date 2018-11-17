@@ -44,6 +44,7 @@ public class Base : MonoBehaviour
 			
             spawnPointsVector3.Add(new Vector3(spawnPoint.position.x, 1, spawnPoint.position.z));
         }
+		spawnPointsVector3.Shuffle();
     }
 
     public void Respawn()
@@ -68,29 +69,28 @@ public class Base : MonoBehaviour
 			babies.Reverse();
 			foreach (FollowerBaby baby in babies)
 			{
-				GainPoint();
-				if(spawnPointsVector3.Any())
+				if(Point < spawnPointsVector3.Count)
 				{
 					BabyScoreVisuals.Add(baby);
-					int randomElement = Random.Range(0, spawnPointsVector3.Count);
-					baby.MoveToBase(spawnPointsVector3[randomElement], true);
-					spawnPointsVector3.RemoveAt(randomElement);
+					baby.MoveToBase(spawnPointsVector3[Point], true);
 				}
 				else
 				{
-					baby.MoveToBase(transform.GetChild(0).position, false);
+					baby.MoveToBase(spawnPointsVector3[0], false);
 				}
+				GainPoint();
 			}
         }
+		babies.Clear();
     }
 
     public void LosePoint()
     {
-        point--;
+        Point--;
     }
     public void GainPoint()
     {
-        point++;
+        Point++;
     }
 
     private void OnTriggerEnter(Collider other)
