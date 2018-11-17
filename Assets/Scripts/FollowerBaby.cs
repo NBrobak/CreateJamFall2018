@@ -9,16 +9,24 @@ public class FollowerBaby : MonoBehaviour
     // public Vector3 targetPos;
     public float moveSpeed = 5f;
     public float displacement = 5f;
-    public Transform targetPos
-    {
-        get; set;
-    }
+    public Transform targetTrans;
+    public Vector3 targetPos;
 
+    public Transform TargetTrans
+    {
+        get
+        {
+            return this.targetTrans;
+        }
+        set
+        {
+            this.targetTrans = value;
+        }
+    }
 
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -35,7 +43,15 @@ public class FollowerBaby : MonoBehaviour
     // }
     void moveTowardsTarget()
     {
-		//Vector3 ongoingtargetPos = (player.transform.position - transform.position) - transform.forward * displacement;
-        transform.position = Vector3.Lerp(transform.position, targetPos.position, moveSpeed * Time.deltaTime);
+        if (isBased)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
+        }
+        else
+        {
+			Vector3 temp = targetTrans.position - (targetTrans.position - transform.position).normalized * displacement;
+            transform.position = Vector3.Lerp(transform.position, new Vector3(temp.x, 0, temp.z), moveSpeed * Time.deltaTime);
+        }
+
     }
 }

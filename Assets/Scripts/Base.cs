@@ -72,6 +72,7 @@ public class Base : MonoBehaviour {
                     babies[0].targetPos.x = stationaryBabiesPos[i].xPos;
                     babies[0].targetPos.z = stationaryBabiesPos[i].yPos;
                     babies[0].targetPos.y = 0f;
+                    babies[0].isBased = true;
                     babies.RemoveAt(0);
                 }
             }

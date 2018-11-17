@@ -126,3 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3406e22c28f6bf469b93e7ca707cfc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBased: 0
+  moveSpeed: 5
+  displacement: 2.75
+  targetTrans: {fileID: 0}
+  targetPos: {x: 0, y: 0, z: 0}

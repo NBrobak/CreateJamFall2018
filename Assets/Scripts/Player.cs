@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public float reboundTime = 0.3f;
     public string playerName;
-	public Color playerColor;
+    public Color playerColor;
     private int life = 5;
 
     [HideInInspector]
@@ -55,52 +55,52 @@ public class Player : MonoBehaviour
         get; set;
     }
 
-	public int Life
-	{
-		get
-		{
-			return life;
-		}
+    public int Life
+    {
+        get
+        {
+            return life;
+        }
 
-		set
-		{
-			life = value;
-			if(value <= 0)
-			{
-				KillPlayer();
-			}
-		}
-	}
+        set
+        {
+            life = value;
+            if (value <= 0)
+            {
+                KillPlayer();
+            }
+        }
+    }
 
-	//Virtual properties for input
-	private float moveX
-	{
-		get { return Input.GetAxisRaw("HorizontalMove" + playerName); }
-	}
-	private float moveY
-	{
-		get { return Input.GetAxisRaw("VerticalMove" + playerName); }
-	}
-	private float aimX
-	{
-		get { return Input.GetAxisRaw("HorizontalAim" + playerName); }
-	}
-	private float aimY
-	{
-		get { return Input.GetAxisRaw("VerticalAim" + playerName); }
-	}
-	private float fireShot
-	{
-		get { return Input.GetAxisRaw("FireGrenade" + playerName); }
-	}
-	private float fireGrenade
-	{
-		get { return Input.GetAxisRaw("FireShot" + playerName); }
-	}
+    //Virtual properties for input
+    private float moveX
+    {
+        get { return Input.GetAxisRaw("HorizontalMove" + playerName); }
+    }
+    private float moveY
+    {
+        get { return Input.GetAxisRaw("VerticalMove" + playerName); }
+    }
+    private float aimX
+    {
+        get { return Input.GetAxisRaw("HorizontalAim" + playerName); }
+    }
+    private float aimY
+    {
+        get { return Input.GetAxisRaw("VerticalAim" + playerName); }
+    }
+    private float fireShot
+    {
+        get { return Input.GetAxisRaw("FireGrenade" + playerName); }
+    }
+    private float fireGrenade
+    {
+        get { return Input.GetAxisRaw("FireShot" + playerName); }
+    }
 
 
-	// Use this for initialization
-	void Start()
+    // Use this for initialization
+    void Start()
     {
         Babies = new List<FollowerBaby>();
         personalBase = GameObject.Find("Base" + playerName).GetComponent<Base>();
@@ -133,13 +133,20 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Converted Baby");
         FollowerBaby FollowBaby = Instantiate(BabyFollowerPrefab);
-        FollowBaby.player = this;
 
         Debug.Log(playerName + " hit the baby");
         FollowBaby.GetComponent<Renderer>().material.color = playerColor;
 
         Babies.Add(FollowBaby);
         Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
+        if (Babies.Count == 1)
+        {
+            FollowBaby.targetTrans = this.transform;
+        }
+        else
+        { //max following
+            FollowBaby.targetTrans = Babies[Babies.Count-1].transform;
+        }
         Debug.Log(Babies.Count);
         Destroy(preBaby);
     }
