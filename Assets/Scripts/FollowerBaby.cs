@@ -6,9 +6,10 @@ public class FollowerBaby : MonoBehaviour
 {
 
     public bool isBased = false;
-    public Vector3 targetPos;
+    // public Vector3 targetPos;
     public float moveSpeed = 5f;
-    public Player player
+    public float displacement = 5f;
+    public Transform targetPos
     {
         get; set;
     }
@@ -23,24 +24,18 @@ public class FollowerBaby : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isBased)
-        {
-            moveTowardsPlayer();
-        }
-        else
-        {
-            moveTowardsTarget();
-        }
+        moveTowardsTarget();
     }
-    void moveTowardsPlayer()
-    {
-        Debug.Log("Moving towards player");
-		Debug.Log(player);
-		Vector3 targetPos = player.
-        transform.position = Vector3.Lerp(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
-    }
+    // void moveTowardsPlayer()
+    // {
+    //     Debug.Log("Moving towards player");
+    //     //Debug.Log(player);
+    //     Vector3 targetPos = (player.transform.position - transform.position) - transform.forward * displacement;
+    //     transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
+    // }
     void moveTowardsTarget()
     {
-
+		//Vector3 ongoingtargetPos = (player.transform.position - transform.position) - transform.forward * displacement;
+        transform.position = Vector3.Lerp(transform.position, targetPos.position, moveSpeed * Time.deltaTime);
     }
 }
