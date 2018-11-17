@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
 	public Color playerColor;
     private int life = 5;
 
+    
+
     [HideInInspector]
     public List<FollowerBaby> Babies;
     private Base personalBase;
@@ -131,7 +133,8 @@ public class Player : MonoBehaviour
             FireGrenade();
            
         }
-        
+
+        animator.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
     }
 
     public void ConvertBaby(GameObject preBaby)
