@@ -1,14 +1,34 @@
 fileFormatVersion: 2
-guid: 090c4aca276491341aa7fe19ade416e6
+guid: 3c183941b0d492644a86d81fcc27b6a6
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: No Name
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: HeadBucket
+    100000: HeadBucket
+    100002: //RootNode
+    100004: Horns
+    100006: Pyramid
+    100008: Squid
+    400000: HeadBucket
+    400002: //RootNode
+    400004: Horns
+    400006: Pyramid
+    400008: Squid
+    2100000: Squid
+    2100002: Horns
+    2100004: Pyramid
+    2100006: Phagett
+    2300000: HeadBucket
+    2300002: Horns
+    2300004: Pyramid
+    2300006: Squid
+    3300000: HeadBucket
+    3300002: Horns
+    3300004: Pyramid
+    3300006: Squid
+    4300000: Squid
+    4300002: Horns
+    4300004: Pyramid
+    4300006: HeadBucket
   externalObjects: {}
   materials:
     importMaterials: 1
