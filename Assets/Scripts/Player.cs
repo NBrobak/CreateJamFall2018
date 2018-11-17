@@ -8,8 +8,7 @@ public class Player : MonoBehaviour
     //bullet variables
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
-    private GameObject bullet;
-    private float bulletSpeed = 6.0f;
+    
 
 
     //grenade Variables
@@ -34,7 +33,8 @@ public class Player : MonoBehaviour
     private float cooldown;
     private Base personalBase;
     private Rigidbody playersRigidbody;
-
+    private bool hasFiredShot = false;
+    private bool hasFiredGrenade = false;
 
     private float Cooldown
     {
@@ -114,15 +114,23 @@ public class Player : MonoBehaviour
         Move();
 
         //if the button is down(==1) call the function FireShot()
-        if (fireShot == 1)
+        if (!hasFiredShot && fireShot == 1)
         {
+            hasFiredShot = true;
             FireShot();
+        } else if (fireShot == 0)
+        {
+            hasFiredShot = false;
         }
         //if the grenade button is pushed and the cooldown is neutral
-        if (fireGrenade == 1 && timer == 0)
+        if (!hasFiredGrenade && fireGrenade == 1)
         {
+            hasFiredGrenade = true;
             FireGrenade();
-            //being cooldown timer
+        }
+        else if (fireGrenade == 0)
+        {
+            hasFiredGrenade = false;
         }
 
 
@@ -184,16 +192,13 @@ public class Player : MonoBehaviour
     private void FireShot()
     {
         // Create the Bullet from the Bullet Prefab
-        bullet = Instantiate(
-            bulletPrefab,
-            bulletSpawn.position,
-            bulletSpawn.rotation);
-
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6.0f;
         // Add velocity to the bullet
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
+
 
         // Destroy the bullet after 2 seconds
-        Destroy(bullet, 2.0f);
+
 
     }
     private void FireGrenade()

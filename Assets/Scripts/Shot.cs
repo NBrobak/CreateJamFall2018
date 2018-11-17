@@ -10,12 +10,13 @@ public class Shot : MonoBehaviour {
     public Transform bulletSpawn;
     private GameObject bullet;
     private float bulletSpeed = 6.0f;
+    private float damage; 
 
     private string newFireShot;
     // Use this for initialization
     void Start () {
-       
-	}
+        this.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
+    }
 
     // Update is called once per frame
     void Update()
