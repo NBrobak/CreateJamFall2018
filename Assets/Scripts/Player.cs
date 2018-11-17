@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     private GameObject atheistGrenadeBaby;
     public float timer;
     public float range;
-    public float speed=3.0f;
+    public float speed = 3.0f;
     public float damage;
     private Animator animator;
     public Transform grenadeSpawn;
@@ -108,13 +108,34 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        
+
     }
     public void ConvertBaby(GameObject preBaby)
     {
         Debug.Log("Converted Baby");
         GameObject FollowBaby = Instantiate(BabyFollowerPrefab);
-        FollowBaby.GetComponent<Renderer>().material
+        FollowBaby.GetComponent<FollowerBaby>().Player = this.GetComponent<Player>().transform;
+        switch (playerName)
+        {
+            case "Player1":
+                Debug.Log(playerName + " hit the baby");
+                FollowBaby.GetComponent<Renderer>().material.color = new Color(243/255f, 126/255f, 33/255f); //orange
+                break;
+            case "Player2":
+                Debug.Log(playerName + " hit the baby");
+                FollowBaby.GetComponent<Renderer>().material.color = new Color(33/255f, 95/255f, 243/255f); //blue
+                break;
+            case "Player3":
+                Debug.Log(playerName + " hit the baby");
+                FollowBaby.GetComponent<Renderer>().material.color = new Color(243/255f, 33/255f, 208/255f); //pink
+                break;
+            case "Player4":
+                Debug.Log(playerName + " hit the baby");
+                FollowBaby.GetComponent<Renderer>().material.color = new Color(243/255f, 126/255f, 33/255f); //orange
+                break;
+
+        }
+
         Babies.Add(FollowBaby.GetComponent<FollowerBaby>());
         Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
         Debug.Log(Babies.Count);
@@ -164,7 +185,7 @@ public class Player : MonoBehaviour
 
         // Destroy the bullet after 2 seconds
         Destroy(bullet, 2.0f);
-        
+
     }
     private void FireGrenade()
     {
@@ -178,6 +199,6 @@ public class Player : MonoBehaviour
 
         // Destroy the bullet after 2 seconds
         Destroy(atheistGrenadeBaby, 2.0f);
-        
+
     }
 }

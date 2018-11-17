@@ -5,8 +5,9 @@ using UnityEngine;
 public class FollowerBaby : MonoBehaviour
 {
     Transform player;
-    public bool isBased;
+    public bool isBased = false;
     public Vector3 targetPos;
+	public float moveSpeed = 5f;
     public Transform Player
     {
         get; set;
@@ -33,11 +34,11 @@ public class FollowerBaby : MonoBehaviour
         {
             moveTowardsTarget();
         }
-
     }
     void moveTowardsPlayer()
     {
-
+		Debug.Log("Moving towards player");
+		Vector3.MoveTowards(transform.position, Player.transform.position, moveSpeed);
     }
     void moveTowardsTarget()
     {
