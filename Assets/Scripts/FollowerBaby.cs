@@ -11,6 +11,13 @@ public class FollowerBaby : MonoBehaviour
     public float displacement = 5f;
     public Vector3 targetPos;
 	public Action onArrivalAtBase;
+    public bool isMoving;
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public Transform TargetTrans
     {
@@ -26,6 +33,7 @@ public class FollowerBaby : MonoBehaviour
     {
         if (isBased)
         {
+            animator.SetBool("isMoving", true);
             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
 			if(transform.position == targetPos)
 			{
@@ -36,6 +44,7 @@ public class FollowerBaby : MonoBehaviour
         {
             if (TargetTrans)
             {
+                animator.SetBool("isMoving", true);
                 Vector3 temp = TargetTrans.position - (TargetTrans.position - transform.position).normalized * displacement;
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(temp.x, transform.position.y, temp.z), moveSpeed * Time.deltaTime);
             }
@@ -49,6 +58,8 @@ public class FollowerBaby : MonoBehaviour
 		if (stay)
 		{
 			onArrivalAtBase += () => { enabled = false; Destroy(GetComponent<Rigidbody>()); };
+            // idle back at base
+            animator.SetBool("isMoving", false);
 		}
 		else
 		{
