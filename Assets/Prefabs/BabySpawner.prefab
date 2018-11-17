@@ -1096,7 +1096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  timeBetweenSpawns: 1
+  timeBetweenSpawns: 2
   spawnPositions:
   - {fileID: 4179431905358168}
   - {fileID: 4445938032874154}
@@ -1134,5 +1134,5 @@ MonoBehaviour:
   - {fileID: 4786582381966756}
   - {fileID: 4951988871667956}
   - {fileID: 4149594236572806}
-  atheistBabyPrefab: {fileID: 114623118553180370, guid: f0c426d6d9849f449846d9f5e93c3a15,
+  atheistBabyPrefab: {fileID: 114497830942288348, guid: f0c426d6d9849f449846d9f5e93c3a15,
     type: 2}
