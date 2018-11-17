@@ -107,6 +107,7 @@ public class Player : MonoBehaviour
 	// Use this for initialization
 	void Start()
     {
+        animator = GetComponent<Animator>();
         Babies = new List<FollowerBaby>();
         personalBase = GameObject.Find("Base" + PlayerName).GetComponent<Base>();
         if (!personalBase.name.Contains("Base")) Debug.Log(PlayerName + ". Couldn't find this Player's personal base");
