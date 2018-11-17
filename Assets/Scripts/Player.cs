@@ -107,6 +107,7 @@ public class Player : MonoBehaviour
 	// Use this for initialization
 	void Start()
     {
+        animator = GetComponent<Animator>();
         Babies = new List<FollowerBaby>();
         personalBase = GameObject.Find("Base" + PlayerName).GetComponent<Base>();
         if (!personalBase.name.Contains("Base")) Debug.Log(PlayerName + ". Couldn't find this Player's personal base");
@@ -149,10 +150,10 @@ public class Player : MonoBehaviour
         Babies.Add(FollowBaby);
         Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
 
-        FollowBaby.targetTrans = this.transform;
+        FollowBaby.TargetTrans = transform;
         if (Babies.Count > 1)
-        { //max following
-            Babies[Babies.Count-2].targetTrans = FollowBaby.transform;
+        {
+            Babies[Babies.Count-2].TargetTrans = FollowBaby.transform;
         }
         Debug.Log(Babies.Count);
         Destroy(preBaby);

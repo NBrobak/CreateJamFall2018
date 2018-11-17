@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Base : MonoBehaviour
 {
@@ -8,15 +9,7 @@ public class Base : MonoBehaviour
 	private float respawnTime = 2;
     [SerializeField]
     private int point = 0;
-    private bool isInSpawn = false;
     private List<FollowerBaby> BabyScoreVisuals;
-
-    private struct StationaryBaby
-    {
-        public float xPos;
-        public float yPos;
-        public bool isOccupied;
-    }
 
     private Player masterBaby;
 
@@ -38,21 +31,20 @@ public class Base : MonoBehaviour
         get { return masterBaby; }
         set { masterBaby = value; }
     }
-
-    private StationaryBaby[] spawnPoints = new StationaryBaby[5];
+	
     private List<Vector3> spawnPointsVector3;
 
     void Start()
     {
         BabyScoreVisuals = new List<FollowerBaby>();
         spawnPointsVector3 = new List<Vector3>();
-        for (int i = 0; i < spawnPoints.Length; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            spawnPoints[i].xPos = this.gameObject.transform.GetChild(i).transform.position.x;
-            spawnPoints[i].yPos = this.gameObject.transform.GetChild(i).transform.position.z;
-            spawnPoints[i].isOccupied = false;
-            spawnPointsVector3.Add(new Vector3(spawnPoints[i].xPos, 1, spawnPoints[i].yPos));
+			Transform spawnPoint = gameObject.transform.GetChild(i);
+			
+            spawnPointsVector3.Add(new Vector3(spawnPoint.position.x, 1, spawnPoint.position.z));
         }
+		spawnPointsVector3.Shuffle();
     }
 
     public void Respawn()
@@ -74,45 +66,31 @@ public class Base : MonoBehaviour
         Debug.Log("Allocate method called");
         if (babies != null)
         {
-            while (spawnPointsVector3.Count > 0)
-            {
-                if (babies.Count > 0)
-                {
-                    GainPoint();
-                    BabyScoreVisuals.Add(babies[0]);
-                    int randomElement = Random.Range(0, spawnPointsVector3.Count - 1);
-                    babies[0].isBased = true;
-                    babies[0].targetPos = spawnPointsVector3[randomElement];
-                    spawnPointsVector3.RemoveAt(randomElement);
-                    babies.RemoveAt(0);
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            if (babies.Count > 0)
-            {
-                while (babies.Count > 0)
-                {
-                    FollowerBaby temp = babies[0];
-                    babies.RemoveAt(0);
-                    Destroy(temp.gameObject);
-                    GainPoint();
-                }
-            }
-
+			babies.Reverse();
+			foreach (FollowerBaby baby in babies)
+			{
+				if(Point < spawnPointsVector3.Count)
+				{
+					BabyScoreVisuals.Add(baby);
+					baby.MoveToBase(spawnPointsVector3[Point], true);
+				}
+				else
+				{
+					baby.MoveToBase(spawnPointsVector3[0], false);
+				}
+				GainPoint();
+			}
         }
+		babies.Clear();
     }
 
     public void LosePoint()
     {
-        point--;
+        Point--;
     }
     public void GainPoint()
     {
-        point++;
+        Point++;
     }
 
     private void OnTriggerEnter(Collider other)
