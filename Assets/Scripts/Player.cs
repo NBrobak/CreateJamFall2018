@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
         FollowerBaby FollowBaby = Instantiate(BabyFollowerPrefab);
 
         Debug.Log(PlayerName + " hit the baby");
-        FollowBaby.GetComponent<Renderer>().material.color = playerColor;
+        FollowBaby.SetDiaperColor(playerColor);
 
         Babies.Add(FollowBaby);
         Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
