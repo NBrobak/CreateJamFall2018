@@ -47,3 +47,10 @@ sysinfo.txt
 
 # CI
 builddir.txt
+Assets/Scenes/Workshop\.unity
+
+Assets/Scenes/Workshop\.unity\.meta
+
+Assets/Scripts/TestAxis\.cs
+
+Assets/Scripts/TestAxis\.cs\.meta
