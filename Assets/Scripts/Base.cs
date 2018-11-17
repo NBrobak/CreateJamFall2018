@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Base : MonoBehaviour
 {
@@ -74,35 +75,22 @@ public class Base : MonoBehaviour
         Debug.Log("Allocate method called");
         if (babies != null)
         {
-            while (spawnPointsVector3.Count > 0)
-            {
-                if (babies.Count > 0)
-                {
-                    GainPoint();
-                    BabyScoreVisuals.Add(babies[0]);
-                    int randomElement = Random.Range(0, spawnPointsVector3.Count - 1);
-                    babies[0].isBased = true;
-                    babies[0].targetPos = spawnPointsVector3[randomElement];
-                    spawnPointsVector3.RemoveAt(randomElement);
-                    babies.RemoveAt(0);
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            if (babies.Count > 0)
-            {
-                while (babies.Count > 0)
-                {
-                    FollowerBaby temp = babies[0];
-                    babies.RemoveAt(0);
-                    Destroy(temp.gameObject);
-                    GainPoint();
-                }
-            }
-
+			babies.Reverse();
+			foreach (FollowerBaby baby in babies)
+			{
+				GainPoint();
+				if(spawnPointsVector3.Any())
+				{
+					BabyScoreVisuals.Add(baby);
+					int randomElement = Random.Range(0, spawnPointsVector3.Count);
+					baby.MoveToBase(spawnPointsVector3[randomElement], true);
+					spawnPointsVector3.RemoveAt(randomElement);
+				}
+				else
+				{
+					baby.MoveToBase(transform.GetChild(0).position, false);
+				}
+			}
         }
     }
 

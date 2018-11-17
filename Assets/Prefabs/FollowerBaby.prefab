@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBased: 0
-  moveSpeed: 25
+  moveSpeed: 12
   displacement: 1.5
-  targetTrans: {fileID: 0}
   targetPos: {x: 0, y: 0, z: 0}
