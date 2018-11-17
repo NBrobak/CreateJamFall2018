@@ -2,24 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowerBaby : MonoBehaviour {
-	GameObject Player;
-	private bool isbased;
+public class FollowerBaby : MonoBehaviour
+{
+    Transform player;
+    public Transform Player
+    {
+        get; set;
+    }
+    public bool isbased;
+	public Vector3 targetPos;
 
-	public FollowerBaby(GameObject PlayerObj, bool _isbased, Vector3 _spawnPos)
-	{
-		this.Player = PlayerObj;
-		this.isbased = _isbased;
-		this.transform.position = _spawnPos;
-	}
-	
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (player)
+        {
+            moveTowardsPlayer();
+        }
+    }
+    void moveTowardsPlayer()
+    {
+
+    }
 }

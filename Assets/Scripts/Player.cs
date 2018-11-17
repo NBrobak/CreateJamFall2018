@@ -49,7 +49,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         Babies = new List<FollowerBaby>();
-
         personalBase = GameObject.Find("Base" + playerName).GetComponent<Base>();
         if (!personalBase.name.Contains("Base")) Debug.Log(playerName + ". Couldn't find this Player's personal base");
         playersRigidbody = this.gameObject.GetComponent<Rigidbody>();
@@ -64,7 +63,7 @@ public class Player : MonoBehaviour
             KillPlayer();
         }
         Move();
-
+        Debug.Log(fireShot);
     }
 
     private void SetInputs()
@@ -80,11 +79,15 @@ public class Player : MonoBehaviour
     {
         
     }
-    private void ConvertBaby(AtheistBaby preBaby)
+    public void ConvertBaby(GameObject preBaby)
     {
-        Babies.Add(Instantiate(BabyFollowerPrefab).GetComponent<FollowerBaby>());
+        Debug.Log("Converted Baby");
+        GameObject FollowBaby = Instantiate(BabyFollowerPrefab);
+        FollowBaby.GetComponent<Renderer>().material
+        Babies.Add(FollowBaby.GetComponent<FollowerBaby>());
         Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
-        Destroy(preBaby.gameObject);
+        Debug.Log(Babies.Count);
+        Destroy(preBaby);
     }
     public void DropBaby()
     {
