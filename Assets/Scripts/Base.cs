@@ -92,7 +92,7 @@ public class Base : MonoBehaviour {
 	private void OnTriggerEnter(Collider other)
 	{
 		Player player = other.gameObject.GetComponent<Player>();
-		if(this.gameObject.name.Contains(player.playerName))
+		if(this.gameObject.name.Contains(player.PlayerName))
 		{
 			Allocate(player.Babies);
 		}

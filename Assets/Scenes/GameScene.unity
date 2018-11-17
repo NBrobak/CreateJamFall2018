@@ -1138,20 +1138,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 114394180120074746, guid: af19534bed56ba14d8ce006a00920807,
-        type: 2}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 224760290089150178, guid: af19534bed56ba14d8ce006a00920807,
         type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114249611991618294, guid: af19534bed56ba14d8ce006a00920807,
-        type: 2}
-      propertyPath: gameTime
-      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af19534bed56ba14d8ce006a00920807, type: 2}

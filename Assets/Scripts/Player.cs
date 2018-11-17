@@ -8,60 +8,44 @@ public class Player : MonoBehaviour
     //bullet variables
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
-    
+    [SerializeField]
+	private float bulletCooldown = 1;
+	private float bulletTimer = 0;
+	[SerializeField]
+	private float bulletSpeed = 10;
 
-
-    //grenade Variables
-    public GameObject atheistGrenadeBabyPrefab;
-    private GameObject atheistGrenadeBaby;
-    public float timer;
+	//grenade Variables
+	public GameObject atheistGrenadeBabyPrefab;
     public float range;
     public float speed = 3.0f;
     public float damage;
     private Animator animator;
     public Transform grenadeSpawn;
+	[SerializeField]
+	private float grenadeCooldown = 2;
+	private float grenadeTimer = 0;
+	[SerializeField]
+	private float grenadeSpeed = 10;
+	[SerializeField]
+	private float grenadeAngledForce = 5;
 
-    public FollowerBaby BabyFollowerPrefab;
+	public FollowerBaby BabyFollowerPrefab;
+
+	//Player variables
     public float moveSpeed;
-    public float reboundTime = 0.3f;
-    public string playerName;
-    public Color playerColor;
+	[SerializeField]
+	private string playerName;
+	public Color playerColor;
     private int life = 5;
 
     [HideInInspector]
     public List<FollowerBaby> Babies;
-    private float cooldown;
     private Base personalBase;
     private Rigidbody playersRigidbody;
-    private bool hasFiredShot = false;
-    private bool hasFiredGrenade = false;
-
-    private float Cooldown
-    {
-        get
-        {
-            return this.cooldown;
-        }
-        set
-        {
-            if (value > 0f)
-            {
-                this.cooldown = value;
-            }
-        }
-    }
-    public string PlayerName
-    {
-        get; set;
-    }
 
     public int Life
     {
-        get
-        {
-            return life;
-        }
-
+        get { return life; }
         set
         {
             life = value;
@@ -72,40 +56,54 @@ public class Player : MonoBehaviour
         }
     }
 
+	public string PlayerName
+	{
+		get
+		{
+			return playerName;
+		}
+
+		set
+		{
+			playerName = value;
+		}
+	}
+
     //Virtual properties for input
     private float moveX
     {
-        get { return Input.GetAxisRaw("HorizontalMove" + playerName); }
+        get { return Input.GetAxisRaw("HorizontalMove" + PlayerName); }
     }
     private float moveY
     {
-        get { return Input.GetAxisRaw("VerticalMove" + playerName); }
+        get { return Input.GetAxisRaw("VerticalMove" + PlayerName); }
     }
     private float aimX
     {
-        get { return Input.GetAxisRaw("HorizontalAim" + playerName); }
+        get { return Input.GetAxisRaw("HorizontalAim" + PlayerName); }
     }
     private float aimY
     {
-        get { return Input.GetAxisRaw("VerticalAim" + playerName); }
+        get { return Input.GetAxisRaw("VerticalAim" + PlayerName); }
     }
     private float fireShot
     {
-        get { return Input.GetAxisRaw("FireGrenade" + playerName); }
+        get { return Input.GetAxisRaw("FireGrenade" + PlayerName); }
     }
     private float fireGrenade
     {
-        get { return Input.GetAxisRaw("FireShot" + playerName); }
+        get { return Input.GetAxisRaw("FireShot" + PlayerName); }
     }
 
-
-    // Use this for initialization
-    void Start()
+	// Use this for initialization
+	void Start()
     {
         Babies = new List<FollowerBaby>();
-        personalBase = GameObject.Find("Base" + playerName).GetComponent<Base>();
-        if (!personalBase.name.Contains("Base")) Debug.Log(playerName + ". Couldn't find this Player's personal base");
+        personalBase = GameObject.Find("Base" + PlayerName).GetComponent<Base>();
+        if (!personalBase.name.Contains("Base")) Debug.Log(PlayerName + ". Couldn't find this Player's personal base");
         playersRigidbody = this.gameObject.GetComponent<Rigidbody>();
+		bulletTimer = -bulletCooldown;
+		grenadeTimer = -grenadeCooldown;
     }
 
     // Update is called once per frame
@@ -114,27 +112,15 @@ public class Player : MonoBehaviour
         Move();
 
         //if the button is down(==1) call the function FireShot()
-        if (!hasFiredShot && fireShot == 1)
+        if (fireShot > 0 && Time.timeSinceLevelLoad - bulletTimer > bulletCooldown)
         {
-            hasFiredShot = true;
             FireShot();
-        } else if (fireShot == 0)
-        {
-            hasFiredShot = false;
         }
         //if the grenade button is pushed and the cooldown is neutral
-        if (!hasFiredGrenade && fireGrenade == 1)
+        if (fireGrenade > 0 && Time.timeSinceLevelLoad - grenadeTimer > grenadeCooldown)
         {
-            hasFiredGrenade = true;
             FireGrenade();
         }
-        else if (fireGrenade == 0)
-        {
-            hasFiredGrenade = false;
-        }
-
-
-        // Debug.Log(fireShot);
     }
 
     public void ConvertBaby(GameObject preBaby)
@@ -142,7 +128,7 @@ public class Player : MonoBehaviour
         Debug.Log("Converted Baby");
         FollowerBaby FollowBaby = Instantiate(BabyFollowerPrefab);
 
-        Debug.Log(playerName + " hit the baby");
+        Debug.Log(PlayerName + " hit the baby");
         FollowBaby.GetComponent<Renderer>().material.color = playerColor;
 
         Babies.Add(FollowBaby);
@@ -191,28 +177,29 @@ public class Player : MonoBehaviour
     }
     private void FireShot()
     {
+		bulletTimer = Time.timeSinceLevelLoad;
         // Create the Bullet from the Bullet Prefab
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6.0f;
-        // Add velocity to the bullet
-
-
-        // Destroy the bullet after 2 seconds
-
-
+		// Add velocity to the bullet
+		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
+		
+		Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>(), true);
     }
     private void FireGrenade()
     {
-        atheistGrenadeBaby = Instantiate(
+		grenadeTimer = Time.timeSinceLevelLoad;
+        GameObject atheistGrenadeBaby = Instantiate(
             atheistGrenadeBabyPrefab,
             grenadeSpawn.position,
             grenadeSpawn.rotation);
 
         // Add velocity to the baby
-        atheistGrenadeBaby.GetComponent<Rigidbody>().AddForce(new Vector3(5, 5, 0), ForceMode.Impulse);
+        atheistGrenadeBaby.GetComponent<Rigidbody>().velocity = 
+			transform.forward * grenadeSpeed + transform.up * grenadeAngledForce;
 
-        // Destroy the bullet after 2 seconds
-        Destroy(atheistGrenadeBaby, 2.0f);
+		Physics.IgnoreCollision(atheistGrenadeBaby.GetComponent<Collider>(), GetComponent<Collider>(), true);
 
+		// Destroy the bullet after 2 seconds
+		Destroy(atheistGrenadeBaby, 2.0f);
     }
 }
