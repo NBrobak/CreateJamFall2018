@@ -774,6 +774,24 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cff13415754766a4db88b867f9f43c04, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &660474830 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114755432761511196, guid: cff13415754766a4db88b867f9f43c04,
+    type: 2}
+  m_PrefabInternal: {fileID: 439540308}
+  m_Script: {fileID: 11500000, guid: fe71ce282d313da4f96d966c3ee73f63, type: 3}
+--- !u!114 &678825982 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114755432761511196, guid: cff13415754766a4db88b867f9f43c04,
+    type: 2}
+  m_PrefabInternal: {fileID: 1138396489}
+  m_Script: {fileID: 11500000, guid: fe71ce282d313da4f96d966c3ee73f63, type: 3}
+--- !u!114 &782084711 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114755432761511196, guid: cff13415754766a4db88b867f9f43c04,
+    type: 2}
+  m_PrefabInternal: {fileID: 573310379}
+  m_Script: {fileID: 11500000, guid: fe71ce282d313da4f96d966c3ee73f63, type: 3}
 --- !u!1001 &1046720100
 Prefab:
   m_ObjectHideFlags: 0
@@ -1155,21 +1173,26 @@ Prefab:
         type: 2}
       propertyPath: playerBases.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 782084711}
     - target: {fileID: 114625159817844114, guid: 58d4ea18fd3a35b43919c9cc3f83fd3d,
         type: 2}
       propertyPath: playerBases.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1749883809}
     - target: {fileID: 114625159817844114, guid: 58d4ea18fd3a35b43919c9cc3f83fd3d,
         type: 2}
       propertyPath: playerBases.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 660474830}
     - target: {fileID: 114625159817844114, guid: 58d4ea18fd3a35b43919c9cc3f83fd3d,
         type: 2}
       propertyPath: playerBases.Array.data[3]
       value: 
+      objectReference: {fileID: 678825982}
+    - target: {fileID: 114625159817844114, guid: 58d4ea18fd3a35b43919c9cc3f83fd3d,
+        type: 2}
+      propertyPath: winTextSizeFactor
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58d4ea18fd3a35b43919c9cc3f83fd3d, type: 2}
@@ -1353,6 +1376,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1749883809 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114755432761511196, guid: cff13415754766a4db88b867f9f43c04,
+    type: 2}
+  m_PrefabInternal: {fileID: 604909729}
+  m_Script: {fileID: 11500000, guid: fe71ce282d313da4f96d966c3ee73f63, type: 3}
 --- !u!1001 &1869914481
 Prefab:
   m_ObjectHideFlags: 0
@@ -1570,6 +1599,11 @@ Prefab:
         type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114249611991618294, guid: af19534bed56ba14d8ce006a00920807,
+        type: 2}
+      propertyPath: gameTime
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af19534bed56ba14d8ce006a00920807, type: 2}

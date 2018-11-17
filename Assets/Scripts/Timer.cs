@@ -34,7 +34,7 @@ public class Timer : MonoBehaviour {
 
 	private void UpdateTimers(float timePlayed)
 	{
-		timerContent = timePlayed;
+		timerContent = gameTime - timePlayed;
 		if (timePlayed > gameTime)
 		{
 			EndGame();
