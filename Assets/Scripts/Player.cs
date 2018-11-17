@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //bullet variables
+    
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
+    private GameObject bullet;
+    private float bulletSpeed = 6.0f;
+
+
     public GameObject BabyFollowerPrefab;
     public float moveSpeed;
     public float reboundTime = 0.3f;
@@ -65,6 +73,10 @@ public class Player : MonoBehaviour
         }
         Move();
 
+
+
+
+
     }
 
     private void SetInputs()
@@ -119,8 +131,18 @@ public class Player : MonoBehaviour
     }
     private void FireShot()
     {
+        // Create the Bullet from the Bullet Prefab
+        bullet = (GameObject)Instantiate(
+            bulletPrefab,
+            bulletSpawn.position,
+            bulletSpawn.rotation);
 
-        //creates a shot object with direction
+        // Add velocity to the bullet
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
+
+        // Destroy the bullet after 2 seconds
+        Destroy(bullet, 2.0f);
+        
     }
     private void FireGrenade()
     {
