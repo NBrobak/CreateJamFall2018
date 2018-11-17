@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
            
         }
 
-        //animator.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
+        animator.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
     }
 
     public void ConvertBaby(GameObject preBaby)

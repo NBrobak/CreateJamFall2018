@@ -9,7 +9,6 @@ public class Base : MonoBehaviour
 	private float respawnTime = 2;
     [SerializeField]
     private int point = 0;
-    private bool isInSpawn = false;
     private List<FollowerBaby> BabyScoreVisuals;
 
     private Player masterBaby;
