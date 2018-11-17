@@ -40,6 +40,8 @@ GameObject:
   - component: {fileID: 33852689727910672}
   - component: {fileID: 54451299676419298}
   - component: {fileID: 136308341690136506}
+  - component: {fileID: 114089398459154126}
+  - component: {fileID: 114610366519510594}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -151,7 +153,7 @@ Animator:
   m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114089398459154126
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1989162496640746}
@@ -167,7 +169,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 4487065071053802}
 --- !u!114 &114610366519510594
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1989162496640746}

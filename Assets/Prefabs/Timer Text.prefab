@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c476f53fd4b102847b6c4699da303e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTime: 10
+  gameTime: 120
   countDownTime: 6
   countDownText: {fileID: 114394180120074746}
   timerText: {fileID: 102947898067054186}
