@@ -229,6 +229,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114717270642265890, guid: bb4054368f915104fb9d4760a028630a,
+        type: 2}
+      propertyPath: bulletSpawn
+      value: 
+      objectReference: {fileID: 1877151411}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4054368f915104fb9d4760a028630a, type: 2}
   m_IsPrefabAsset: 0
@@ -419,6 +424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3a226acb6da9a4890487ce4c29128f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootButton: 
-  bulletPrefab: {fileID: 0}
-  bulletSpawn: {fileID: 0}
+--- !u!4 &1877151411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4500165408068186, guid: bb4054368f915104fb9d4760a028630a,
+    type: 2}
+  m_PrefabInternal: {fileID: 238026441}
