@@ -5,8 +5,7 @@ using UnityEngine;
 public class Base : MonoBehaviour {
 	[SerializeField]
 	private int point = 0;
-	private struct StationaryBaby
-	{
+	private struct StationaryBaby{
 		public FollowerBaby followerBaby;
 		public float xPos;
 		public float yPos;
@@ -18,7 +17,8 @@ public class Base : MonoBehaviour {
 
     private Player masterBaby;
 
-	public int Point{
+	public int Point
+	{
 		get{
 			return this.point;
 			}
@@ -78,10 +78,12 @@ public class Base : MonoBehaviour {
         }
     }
 
-	public void LoosePoint(){
-
+	public void LosePoint()
+	{
+		point--;
 	}
-	public void GainPoint(){
-		
+	public void GainPoint()
+	{
+		point++;
 	}
 }
