@@ -45,12 +45,12 @@ public class FollowerBaby : MonoBehaviour
     {
         if (isBased)
         {
-            transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
         }
         else
         {
 			Vector3 temp = targetTrans.position - (targetTrans.position - transform.position).normalized * displacement;
-            transform.position = Vector3.Lerp(transform.position, new Vector3(temp.x, 0, temp.z), moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(temp.x, transform.position.y, temp.z), moveSpeed * Time.deltaTime);
         }
 
     }

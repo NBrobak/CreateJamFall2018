@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 33852689727910672}
   - component: {fileID: 54451299676419298}
   - component: {fileID: 136308341690136506}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   grenadeSpawn: {fileID: 0}
   BabyFollowerPrefab: {fileID: 114076097836435678, guid: 78cab26e98fe7cc409ba5766bd75374c,
     type: 2}
-  moveSpeed: 25
+  moveSpeed: 12
   reboundTime: 0.3
   playerName: Player1
   playerColor: {r: 1, g: 0.46672806, b: 0, a: 0}

@@ -139,13 +139,11 @@ public class Player : MonoBehaviour
 
         Babies.Add(FollowBaby);
         Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
-        if (Babies.Count == 1)
-        {
-            FollowBaby.targetTrans = this.transform;
-        }
-        else
+
+        FollowBaby.targetTrans = this.transform;
+        if (Babies.Count > 1)
         { //max following
-            FollowBaby.targetTrans = Babies[Babies.Count-2].transform;
+            Babies[Babies.Count-2].targetTrans = FollowBaby.transform;
         }
         Debug.Log(Babies.Count);
         Destroy(preBaby);
@@ -173,8 +171,10 @@ public class Player : MonoBehaviour
     }
     private void Move()
     {
-        //take input, lerp between current position and target position
-        transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(moveX * moveSpeed, 0f, moveY * moveSpeed), reboundTime * Time.deltaTime);
+        //take input, go to target position
+        Vector3 newPos = transform.position + new Vector3(moveX, 0f, moveY) * moveSpeed * Time.deltaTime;
+		transform.LookAt(newPos);
+		transform.position = newPos;
     }
     private Vector3 AimDirection()
     {
