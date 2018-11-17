@@ -81,19 +81,32 @@ public class Base : MonoBehaviour
                     babies[0].targetPos = spawnPointsVector3[randomElement];
                     spawnPointsVector3.RemoveAt(randomElement);
                     babies.RemoveAt(0);
-                } else{
+                }
+                else
+                {
                     break;
                 }
             }
 
-            if (babies.Count > 0){
-                foreach (var item in babies)
+            if (babies.Count > 0)
+            {
+                while (babies.Count > 0)
                 {
+                    FollowerBaby temp = babies[0];
+                    babies.RemoveAt(0);
+                    Destroy(temp.gameObject);
                     GainPoint();
-                    Destroy(item.gameObject);
                 }
+
+
+
+                // foreach (var item in babies)
+                // {
+                //     GainPoint();
+                //     Destroy(item.gameObject);
+                // }
             }
-            
+
         }
 
 
