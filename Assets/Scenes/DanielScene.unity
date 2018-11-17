@@ -243,7 +243,7 @@ Prefab:
         type: 2}
       propertyPath: explisionParticleEffect
       value: 
-      objectReference: {fileID: 1742149168930732, guid: ead8a9f7a75dded49a9086ff3e90ef56,
+      objectReference: {fileID: 1706648699360958, guid: ead8a9f7a75dded49a9086ff3e90ef56,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4054368f915104fb9d4760a028630a, type: 2}
