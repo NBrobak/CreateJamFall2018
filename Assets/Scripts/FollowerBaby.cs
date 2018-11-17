@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class FollowerBaby : MonoBehaviour {
 	GameObject Player;
-	private bool based;
-	private Vector3 targetPos;
+	private bool isbased;
+
+	public FollowerBaby(GameObject PlayerObj, bool _isbased, Vector3 _spawnPos)
+	{
+		this.Player = PlayerObj;
+		this.isbased = _isbased;
+		this.transform.position = _spawnPos;
+	}
 	
 	// Use this for initialization
 	void Start () {
