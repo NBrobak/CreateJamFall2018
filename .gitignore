@@ -33,7 +33,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.symbols.zip
-*.unitypackage
+
 
 # Mac specific OS files
 .DS_Store
