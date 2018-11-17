@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     public Transform grenadeSpawn;
 
-    public GameObject BabyFollowerPrefab;
+    public FollowerBaby BabyFollowerPrefab;
     public float moveSpeed;
     public float reboundTime = 0.3f;
     private float moveX;
@@ -34,7 +34,8 @@ public class Player : MonoBehaviour
     public string playerName;
     private int life = 5;
 
-    private List<FollowerBaby> Babies;
+    [HideInInspector]
+    public List<FollowerBaby> Babies;
     private float cooldown;
     private Base personalBase;
     private Rigidbody playersRigidbody;
@@ -94,7 +95,7 @@ public class Player : MonoBehaviour
         }
 
 
-        Debug.Log(fireShot);
+        // Debug.Log(fireShot);
     }
 
     private void SetInputs()
@@ -113,25 +114,25 @@ public class Player : MonoBehaviour
     public void ConvertBaby(GameObject preBaby)
     {
         Debug.Log("Converted Baby");
-        GameObject FollowBaby = Instantiate(BabyFollowerPrefab);
-        FollowBaby.GetComponent<FollowerBaby>().Player = this.GetComponent<Player>().transform;
+        FollowerBaby FollowBaby = Instantiate(BabyFollowerPrefab);
+        FollowBaby.player = this;
         switch (playerName)
         {
             case "Player1":
                 Debug.Log(playerName + " hit the baby");
-                FollowBaby.GetComponent<Renderer>().material.color = new Color(243/255f, 126/255f, 33/255f); //orange
+                FollowBaby.GetComponent<Renderer>().material.color = new Color(243 / 255f, 126 / 255f, 33 / 255f); //orange
                 break;
             case "Player2":
                 Debug.Log(playerName + " hit the baby");
-                FollowBaby.GetComponent<Renderer>().material.color = new Color(33/255f, 95/255f, 243/255f); //blue
+                FollowBaby.GetComponent<Renderer>().material.color = new Color(33 / 255f, 95 / 255f, 243 / 255f); //blue
                 break;
             case "Player3":
                 Debug.Log(playerName + " hit the baby");
-                FollowBaby.GetComponent<Renderer>().material.color = new Color(243/255f, 33/255f, 208/255f); //pink
+                FollowBaby.GetComponent<Renderer>().material.color = new Color(243 / 255f, 33 / 255f, 208 / 255f); //pink
                 break;
             case "Player4":
                 Debug.Log(playerName + " hit the baby");
-                FollowBaby.GetComponent<Renderer>().material.color = new Color(243/255f, 126/255f, 33/255f); //orange
+                FollowBaby.GetComponent<Renderer>().material.color = new Color(243 / 255f, 126 / 255f, 33 / 255f); //orange
                 break;
 
         }
