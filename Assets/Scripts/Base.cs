@@ -12,13 +12,6 @@ public class Base : MonoBehaviour
     private bool isInSpawn = false;
     private List<FollowerBaby> BabyScoreVisuals;
 
-    private struct StationaryBaby
-    {
-        public float xPos;
-        public float yPos;
-        public bool isOccupied;
-    }
-
     private Player masterBaby;
 
     public int Point
@@ -39,20 +32,18 @@ public class Base : MonoBehaviour
         get { return masterBaby; }
         set { masterBaby = value; }
     }
-
-    private StationaryBaby[] spawnPoints = new StationaryBaby[5];
+	
     private List<Vector3> spawnPointsVector3;
 
     void Start()
     {
         BabyScoreVisuals = new List<FollowerBaby>();
         spawnPointsVector3 = new List<Vector3>();
-        for (int i = 0; i < spawnPoints.Length; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            spawnPoints[i].xPos = this.gameObject.transform.GetChild(i).transform.position.x;
-            spawnPoints[i].yPos = this.gameObject.transform.GetChild(i).transform.position.z;
-            spawnPoints[i].isOccupied = false;
-            spawnPointsVector3.Add(new Vector3(spawnPoints[i].xPos, 1, spawnPoints[i].yPos));
+			Transform spawnPoint = gameObject.transform.GetChild(i);
+			
+            spawnPointsVector3.Add(new Vector3(spawnPoint.position.x, 1, spawnPoint.position.z));
         }
     }
 
