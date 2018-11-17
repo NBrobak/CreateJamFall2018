@@ -25,13 +25,8 @@ public class Player : MonoBehaviour
     public GameObject BabyFollowerPrefab;
     public float moveSpeed;
     public float reboundTime = 0.3f;
-    private float moveX;
-    private float moveY;
-    private float aimX;
-    private float aimY;
-    private float fireShot;
-    private float fireGrenade;
     public string playerName;
+	public Color playerColor;
     private int life = 5;
 
     private List<FollowerBaby> Babies;
@@ -59,11 +54,52 @@ public class Player : MonoBehaviour
         get; set;
     }
 
+	public int Life
+	{
+		get
+		{
+			return life;
+		}
+
+		set
+		{
+			life = value;
+			if(value <= 0)
+			{
+				KillPlayer();
+			}
+		}
+	}
+
+	//Virtual properties for input
+	private float moveX
+	{
+		get { return Input.GetAxisRaw("HorizontalMove" + playerName); }
+	}
+	private float moveY
+	{
+		get { return Input.GetAxisRaw("VerticalMove" + playerName); }
+	}
+	private float aimX
+	{
+		get { return Input.GetAxisRaw("HorizontalAim" + playerName); }
+	}
+	private float aimY
+	{
+		get { return Input.GetAxisRaw("VerticalAim" + playerName); }
+	}
+	private float fireShot
+	{
+		get { return Input.GetAxisRaw("FireGrenade" + playerName); }
+	}
+	private float fireGrenade
+	{
+		get { return Input.GetAxisRaw("FireShot" + playerName); }
+	}
 
 
-
-    // Use this for initialization
-    void Start()
+	// Use this for initialization
+	void Start()
     {
         Babies = new List<FollowerBaby>();
         personalBase = GameObject.Find("Base" + playerName).GetComponent<Base>();
@@ -74,11 +110,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetInputs();    //sets controller inputs based on PlayerName
-        if (life <= 0)
-        {
-            KillPlayer();
-        }
         Move();
 
         //if the button is down(==1) call the function FireShot()
@@ -97,44 +128,14 @@ public class Player : MonoBehaviour
         Debug.Log(fireShot);
     }
 
-    private void SetInputs()
-    {
-        moveX = Input.GetAxisRaw("HorizontalMove" + playerName);
-        moveY = Input.GetAxisRaw("VerticalMove" + playerName);
-        aimX = Input.GetAxisRaw("HorizontalAim" + playerName);
-        aimY = Input.GetAxisRaw("VerticalAim" + playerName);
-        fireGrenade = Input.GetAxisRaw("FireGrenade" + playerName);
-        fireShot = Input.GetAxisRaw("FireShot" + playerName);
-    }
-    void FixedUpdate()
-    {
-
-    }
     public void ConvertBaby(GameObject preBaby)
     {
         Debug.Log("Converted Baby");
         GameObject FollowBaby = Instantiate(BabyFollowerPrefab);
         FollowBaby.GetComponent<FollowerBaby>().Player = this.GetComponent<Player>().transform;
-        switch (playerName)
-        {
-            case "Player1":
-                Debug.Log(playerName + " hit the baby");
-                FollowBaby.GetComponent<Renderer>().material.color = new Color(243/255f, 126/255f, 33/255f); //orange
-                break;
-            case "Player2":
-                Debug.Log(playerName + " hit the baby");
-                FollowBaby.GetComponent<Renderer>().material.color = new Color(33/255f, 95/255f, 243/255f); //blue
-                break;
-            case "Player3":
-                Debug.Log(playerName + " hit the baby");
-                FollowBaby.GetComponent<Renderer>().material.color = new Color(243/255f, 33/255f, 208/255f); //pink
-                break;
-            case "Player4":
-                Debug.Log(playerName + " hit the baby");
-                FollowBaby.GetComponent<Renderer>().material.color = new Color(243/255f, 126/255f, 33/255f); //orange
-                break;
 
-        }
+        Debug.Log(playerName + " hit the baby");
+        FollowBaby.GetComponent<Renderer>().material.color = playerColor;
 
         Babies.Add(FollowBaby.GetComponent<FollowerBaby>());
         Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
@@ -147,7 +148,7 @@ public class Player : MonoBehaviour
         if (Babies.Count > 0)
         {
             Babies.RemoveAt(Random.Range(0, Babies.Count - 1));
-            life--;
+            Life--;
         }
     }
     private void DropAllBabies()
@@ -175,7 +176,7 @@ public class Player : MonoBehaviour
     private void FireShot()
     {
         // Create the Bullet from the Bullet Prefab
-        bullet = (GameObject)Instantiate(
+        bullet = Instantiate(
             bulletPrefab,
             bulletSpawn.position,
             bulletSpawn.rotation);
@@ -189,7 +190,7 @@ public class Player : MonoBehaviour
     }
     private void FireGrenade()
     {
-        atheistGrenadeBaby = (GameObject)Instantiate(
+        atheistGrenadeBaby = Instantiate(
             atheistGrenadeBabyPrefab,
             grenadeSpawn.position,
             grenadeSpawn.rotation);
