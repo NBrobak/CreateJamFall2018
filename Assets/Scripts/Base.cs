@@ -12,6 +12,7 @@ public class Base : MonoBehaviour
     private List<FollowerBaby> BabyScoreVisuals;
 
     private Player masterBaby;
+    
 
     public int Point
     {
@@ -38,9 +39,10 @@ public class Base : MonoBehaviour
     {
         BabyScoreVisuals = new List<FollowerBaby>();
         spawnPointsVector3 = new List<Vector3>();
-        for (int i = 0; i < transform.childCount; i++)
+        Transform[] childTransforms = transform.Cast<Transform>().Where(c => c.gameObject.tag == "BaseSpawnPos").ToArray();
+        for (int i = 0; i < childTransforms.Length; i++)
         {
-			Transform spawnPoint = gameObject.transform.GetChild(i);
+			Transform spawnPoint = childTransforms[i];
 			
             spawnPointsVector3.Add(new Vector3(spawnPoint.position.x, 1, spawnPoint.position.z));
         }
