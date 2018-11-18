@@ -35,8 +35,8 @@ public class Base : MonoBehaviour
 
     private List<Vector3> spawnPointsVector3;
     private bool isFenceUP = false;
-    private Transform fence;
-    private float fenceMoveSpeed = 6f;
+    public Transform fence;
+    public float fenceMoveSpeed = 0.3f;
 
     void Start()
     {
@@ -50,18 +50,19 @@ public class Base : MonoBehaviour
             spawnPointsVector3.Add(new Vector3(spawnPoint.position.x, 1, spawnPoint.position.z));
         }
         spawnPointsVector3.Shuffle();
-        fence = transform.GetChild(5).transform;
     }
 
     void Update()
     {
         if (isFenceUP)
         {
-            fence.position = Vector3.MoveTowards(fence.position, new Vector3(fence.position.x, -1.377f, fence.position.z), fenceMoveSpeed * Time.deltaTime);
+            Debug.Log("Fence is actually being put up");
+            fence.position = Vector3.MoveTowards(fence.position, new Vector3(fence.position.x, 1.377f, fence.position.z), fenceMoveSpeed * Time.deltaTime);
         }
         else
         {
-            fence.position = Vector3.MoveTowards(fence.position, new Vector3(fence.position.x, -2.56f, fence.position.z), fenceMoveSpeed * Time.deltaTime);
+                   Debug.Log("Fence is actually being put down");
+            fence.position = Vector3.MoveTowards(fence.position, new Vector3(fence.position.x, -1f, fence.position.z), fenceMoveSpeed * Time.deltaTime);
         }
     }
 
@@ -70,17 +71,18 @@ public class Base : MonoBehaviour
         masterBaby.transform.position = transform.position;
         masterBaby.Life = Player.MAX_HEALTH;
         masterBaby.enabled = false;
+        isFenceUP = true;
+        Debug.Log("Fence is being put up");
         StartCoroutine(ReactivatePlayer());
     }
 
     private IEnumerator ReactivatePlayer()
     {
-        //put up fence
-        isFenceUP = true;
         // fence.new Vector3(transform.GetChild(5).transform.position.x, -1.377f, transform.GetChild(5).transform.position.z);
         yield return new WaitForSeconds(respawnTime);
         //take down fence
         isFenceUP = false;
+        Debug.Log("Fence is being put down");
         // transform.GetChild(5).transform.position = new Vector3(transform.GetChild(5).transform.position.x, -2.56f, transform.GetChild(5).transform.position.z);
         masterBaby.enabled = true;
     }
