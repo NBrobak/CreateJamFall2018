@@ -13,8 +13,10 @@ public class Timer : MonoBehaviour {
 	private Text countDownText;
 	[SerializeField]
 	private TextMesh timerText;
-
+    public AudioClip countDownSound;
 	public Action notifyOfEndedGame;
+    private AudioSource audioSrc;
+    private bool doOnce = true;
 
 	public float timerContent {
 		get { return float.Parse(timerText.text.Remove(0, 6)); }
@@ -27,7 +29,12 @@ public class Timer : MonoBehaviour {
 		private set { countDownText.text = Mathf.FloorToInt(value) + "..."; }
 	}
 
-	private void Update()
+    private void Start()
+    {
+        audioSrc = GetComponent<AudioSource>();
+    }
+
+    private void Update()
 	{
 		UpdateTimers(Time.timeSinceLevelLoad);
 	}
@@ -41,6 +48,13 @@ public class Timer : MonoBehaviour {
 		}
 		else if (timePlayed > gameTime - countDownTime)
 		{
+            if (doOnce)
+            {
+                doOnce = false;
+                audioSrc.clip = countDownSound;
+                audioSrc.volume = .6f;
+                audioSrc.Play();
+            }
 			countDownTimerContent = gameTime - timePlayed;
 		}
 	}
