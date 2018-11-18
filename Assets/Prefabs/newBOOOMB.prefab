@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 33587592064004396}
   - component: {fileID: 54179741706876132}
   - component: {fileID: 65059504350016466}
+  - component: {fileID: 114442494621126480}
   m_Layer: 0
   m_Name: newBOOOMB
   m_TagString: Untagged
@@ -1317,6 +1318,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114442494621126480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1839783068332510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780add7435d03e840afb9d8cdf6ffb40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 2
+  explosionRadius: 2
+  damage: 2
 --- !u!137 &137436722655264870
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
