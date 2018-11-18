@@ -234,7 +234,7 @@ public class Player : MonoBehaviour
     
     IEnumerator GreenBoom()
     {
-        yield return new WaitForSecondsRealtime(1.8f);
+        yield return new WaitForSeconds(1.8f);
         GameObject temp2 = Instantiate(explisionParticleEffect, atheistGrenadeBaby.transform.position, atheistGrenadeBabyPrefab.transform.rotation);
         Destroy(temp2, 4f) ;
     }
@@ -246,11 +246,10 @@ public class Player : MonoBehaviour
         {
             GameObject despawnParticleEffect = Instantiate(deSpawnSmoke, despawnedChild.transform);
             despawnParticleEffect.transform.position = new Vector3(despawnParticleEffect.transform.position.x, 0f, despawnParticleEffect.transform.position.z);
-            Destroy(despawnParticleEffect, 1f);
             Destroy(despawnedChild.gameObject, 1f);
         }
  
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSeconds(1f);
 
         grenadeTimer = Time.timeSinceLevelLoad;
         atheistGrenadeBaby = Instantiate(
@@ -268,7 +267,6 @@ public class Player : MonoBehaviour
         GameObject temp = Instantiate(pentagram, grenadeSpawn.transform);
         temp.transform.SetParent(this.gameObject.transform);
         
-        Destroy(atheistGrenadeBaby, 2.0f);
         Destroy(temp, 2.0f);
         
         dontSpamPent = false;
