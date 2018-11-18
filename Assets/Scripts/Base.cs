@@ -71,7 +71,7 @@ public class Base : MonoBehaviour
     public void Respawn()
     {
         audioSrc.clip = respawnSound;
-        audioSrc.volume = .5f;
+        audioSrc.volume = .2f;
         audioSrc.pitch = Random.Range(.8f, 1.2f);
         audioSrc.Play();
         masterBaby.transform.position = transform.position;

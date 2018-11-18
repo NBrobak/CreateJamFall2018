@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 2
-  explosionRadius: 2
+  explosionRadius: 5
   damage: 2
 --- !u!137 &137436722655264870
 SkinnedMeshRenderer:

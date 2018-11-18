@@ -160,6 +160,11 @@ public class Player : MonoBehaviour
         animator.SetFloat("Speed", (Mathf.Abs(moveX) + Mathf.Abs(moveY)));
     }
 
+    private void FixedUpdate()
+    {
+        playersRigidbody.velocity = Vector3.zero;
+    }
+
     public void ConvertBaby(GameObject preBaby)
     {
         FollowerBaby FollowBaby = Instantiate(BabyFollowerPrefab);
@@ -171,7 +176,7 @@ public class Player : MonoBehaviour
 
             audioSrc.clip = convertSound;
             audioSrc.pitch = Random.Range(.6f, 1.1f);
-            audioSrc.volume = .3f;
+            audioSrc.volume = .2f;
             audioSrc.Play();
 
             Babies.Add(FollowBaby);
@@ -215,7 +220,7 @@ public class Player : MonoBehaviour
 		Life -= damage;
         audioSrc.clip = damageSound;
         audioSrc.pitch = Random.Range(.9f, 1.1f);
-        audioSrc.volume = .5f;
+        audioSrc.volume = .3f;
         audioSrc.Play();
 		Debug.Log(playerName + " health " + Life);
 	}
@@ -242,7 +247,7 @@ public class Player : MonoBehaviour
     {
         audioSrc.clip = shootSound;
         audioSrc.pitch = Random.Range(1.1f, 1.5f);
-        audioSrc.volume = .5f;
+        audioSrc.volume = .3f;
         audioSrc.Play();
         bulletTimer = Time.timeSinceLevelLoad;
         // Create the Bullet from the Bullet Prefab
@@ -269,7 +274,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(1.8f);
         audioSrc.clip = explodeSound;
         audioSrc.pitch = Random.Range(.9f, 1.1f);
-        audioSrc.volume = .6f;
+        audioSrc.volume = .3f;
         audioSrc.Play();
         GameObject temp2 = Instantiate(explisionParticleEffect, atheistGrenadeBaby.transform.position, atheistGrenadeBabyPrefab.transform.rotation);
         Destroy(temp2, 4f);
