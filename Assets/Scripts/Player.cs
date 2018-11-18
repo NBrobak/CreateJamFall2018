@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
         Debug.Log(PlayerName + " hit the baby");
         if (FollowBaby)
         {
-            FollowBaby.GetComponent<Renderer>().material.color = playerColor;
+            FollowBaby.SetDiaperColor(playerColor);
 
             Babies.Add(FollowBaby);
             Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
@@ -274,3 +274,4 @@ public class Player : MonoBehaviour
 
 
 }
+

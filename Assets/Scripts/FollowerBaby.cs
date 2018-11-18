@@ -12,6 +12,7 @@ public class FollowerBaby : MonoBehaviour
     public Vector3 targetPos;
 	public Action onArrivalAtBase;
     public bool isMoving;
+    public Renderer[] colChangeObjects;
     private Animator animator;
 
     private void Start()
@@ -66,4 +67,12 @@ public class FollowerBaby : MonoBehaviour
 			onArrivalAtBase += () => Destroy(gameObject);
 		}
 	}
+
+    public void SetDiaperColor(Color col)
+    {
+        foreach (var item in colChangeObjects)
+        {
+            item.sharedMaterial.color = col;
+        }
+    }
 }
