@@ -295,7 +295,7 @@ public class Player : MonoBehaviour
             grenadeSpawn.rotation);
         StartCoroutine(GreenBoom());
         audioSrc.clip = throwSound;
-        audioSrc.pitch = Random.Range(.6f, .8f);
+        audioSrc.pitch = Random.Range(.6f, 1.4f);
         audioSrc.volume = 1f;
         audioSrc.Play();
 
