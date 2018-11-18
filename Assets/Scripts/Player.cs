@@ -38,7 +38,8 @@ public class Player : MonoBehaviour
     private bool dontSpamEx = false;
     private bool dontSpamPent = false;
     public GameObject deSpawnSmoke;
-
+	[SerializeField]
+	private Renderer healtIcon;
 
 	//Player variables
     public float moveSpeed;
@@ -57,6 +58,8 @@ public class Player : MonoBehaviour
         set
         {
             life = value;
+			float healthPercent = (float)(value - 1) / (MAX_HEALTH - 1);
+			healtIcon.material.color = Color.Lerp(Color.red, Color.green, healthPercent);
             if (value <= 0)
             {
                 KillPlayer();
