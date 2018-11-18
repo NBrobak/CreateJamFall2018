@@ -190,6 +190,7 @@ public class Player : MonoBehaviour
 	{
 		DropBabies(damage);
 		Life -= damage;
+		Debug.Log(playerName + " health " + Life);
 	}
 
     private void KillPlayer()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19295,6 +19295,7 @@ GameObject:
   - component: {fileID: 734977908}
   - component: {fileID: 734977910}
   - component: {fileID: 734977909}
+  - component: {fileID: 734977911}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -19359,6 +19360,20 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 734977907}
+  m_Mesh: {fileID: 4300024, guid: d956cb64d324ba342912fb3fdcf507e4, type: 3}
+--- !u!64 &734977911
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 734977907}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300024, guid: d956cb64d324ba342912fb3fdcf507e4, type: 3}
 --- !u!114 &782084711 stripped
 MonoBehaviour:
@@ -28778,7 +28793,7 @@ Prefab:
     - target: {fileID: 114717270642265890, guid: bb4054368f915104fb9d4760a028630a,
         type: 2}
       propertyPath: playerColor.g
-      value: 0.9744202
+      value: 0.96140754
       objectReference: {fileID: 0}
     - target: {fileID: 114717270642265890, guid: bb4054368f915104fb9d4760a028630a,
         type: 2}
@@ -28817,6 +28832,11 @@ Prefab:
     - target: {fileID: 4321205412331060, guid: bb4054368f915104fb9d4760a028630a, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114717270642265890, guid: bb4054368f915104fb9d4760a028630a,
+        type: 2}
+      propertyPath: playerColor.r
+      value: 0.972549
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4054368f915104fb9d4760a028630a, type: 2}
@@ -75451,6 +75471,26 @@ Prefab:
     - target: {fileID: 1989162496640746, guid: bb4054368f915104fb9d4760a028630a, type: 2}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114717270642265890, guid: bb4054368f915104fb9d4760a028630a,
+        type: 2}
+      propertyPath: playerName
+      value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114717270642265890, guid: bb4054368f915104fb9d4760a028630a,
+        type: 2}
+      propertyPath: playerColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114717270642265890, guid: bb4054368f915104fb9d4760a028630a,
+        type: 2}
+      propertyPath: playerColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114717270642265890, guid: bb4054368f915104fb9d4760a028630a,
+        type: 2}
+      propertyPath: playerColor.b
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4054368f915104fb9d4760a028630a, type: 2}
