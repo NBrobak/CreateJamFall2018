@@ -36,6 +36,7 @@ public class FollowerBaby : MonoBehaviour
         if (isBased)
         {
             animator.SetBool("isMoving", true);
+			transform.LookAt(targetPos);
             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
 			if(transform.position == targetPos)
 			{
@@ -47,6 +48,7 @@ public class FollowerBaby : MonoBehaviour
             if (TargetTrans)
             {
                 animator.SetBool("isMoving", true);
+				transform.LookAt(TargetTrans.position);
                 Vector3 temp = TargetTrans.position - (TargetTrans.position - transform.position).normalized * displacement;
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(temp.x, transform.position.y, temp.z), moveSpeed * Time.deltaTime);
             }
