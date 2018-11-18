@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23647600118446610}
   m_Layer: 0
   m_Name: B3
-  m_TagString: Untagged
+  m_TagString: BaseSpawnPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23741711960237672}
   m_Layer: 0
   m_Name: B4
-  m_TagString: Untagged
+  m_TagString: BaseSpawnPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,6 +57,21 @@ GameObject:
   - component: {fileID: 23849288244776690}
   m_Layer: 0
   m_Name: B2
+  m_TagString: BaseSpawnPos
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1499197768736156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4002711856802526}
+  m_Layer: 0
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +106,7 @@ GameObject:
   - component: {fileID: 23258822465644016}
   m_Layer: 0
   m_Name: B1
-  m_TagString: Untagged
+  m_TagString: BaseSpawnPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,11 +123,24 @@ GameObject:
   - component: {fileID: 23254792975565256}
   m_Layer: 0
   m_Name: B5
-  m_TagString: Untagged
+  m_TagString: BaseSpawnPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4002711856802526
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1499197768736156}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4590829087228444}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4502030009188228
 Transform:
   m_ObjectHideFlags: 1
@@ -154,6 +182,7 @@ Transform:
   - {fileID: 4653629640890526}
   - {fileID: 4502030009188228}
   - {fileID: 4575861775763900}
+  - {fileID: 4002711856802526}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -417,6 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe71ce282d313da4f96d966c3ee73f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnTime: 2
   point: 0
 --- !u!136 &136424767374848790
 CapsuleCollider:
