@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private string playerName;
 	public Color playerColor;
+    public Material[] colorMats;
+    public Renderer[] colorRenders;
     private int life;
 
     public List<FollowerBaby> Babies;
@@ -118,6 +120,14 @@ public class Player : MonoBehaviour
 		bulletTimer = -bulletCooldown;
 		grenadeTimer = -grenadeCooldown;
 		Life = MAX_HEALTH;
+
+
+        for (int i = 0; i < colorMats.Length; i++)
+        {
+            Material mat = new Material(colorMats[i]);
+            mat.color = playerColor;
+            colorRenders[i].material = mat;
+        }
     }
 
     // Update is called once per frame
