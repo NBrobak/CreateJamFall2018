@@ -277,6 +277,7 @@ MonoBehaviour:
   - {fileID: 0}
   winnerText: {fileID: 114284603217330272}
   winTextSizeFactor: 0.1
+  keepScoreObjectOnEND: {fileID: 0}
 --- !u!114 &114703478997417978
 MonoBehaviour:
   m_ObjectHideFlags: 1

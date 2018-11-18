@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour {
 	private Text winnerText;
 	[SerializeField]
 	private float winTextSizeFactor = 0.15f;
+	public GameObject keepScoreObjectOnEND;
+
 
 	private void Awake()
 	{
@@ -34,10 +36,20 @@ public class GameController : MonoBehaviour {
 	private void SetWinners(IEnumerable<Player> winners)
 	{
 		string winnerNames = string.Join(" and ", winners.Select(p => p.PlayerName).ToArray());
-		winnerText.text = winnerNames + " Wins!";
-		winnerText.fontSize = (int)(winnerText.fontSize * (1f - (winTextSizeFactor * (winners.Count() - 1f))));
 
-		winnerText.transform.parent.gameObject.SetActive(true);
+		// winnerText.text = winnerNames + " Wins!";
+		//  winnerText.fontSize = (int)(winnerText.fontSize * (1f - (winTextSizeFactor * (winners.Count() - 1f))));
+
+
+		// winnerText.transform.parent.gameObject.SetActive(true);
+		keepScoreObjectOnEND.GetComponent<EndScene>().Player1_score = playerBases[0].Point;
+		keepScoreObjectOnEND.GetComponent<EndScene>().Player2_score = playerBases[1].Point;
+		keepScoreObjectOnEND.GetComponent<EndScene>().Player3_score = playerBases[2].Point;
+		keepScoreObjectOnEND.GetComponent<EndScene>().Player4_score = playerBases[3].Point;
+		keepScoreObjectOnEND.GetComponent<EndScene>().gameEnded = true;
+		keepScoreObjectOnEND.GetComponent<EndScene>().winnerString = winnerNames;
+		keepScoreObjectOnEND.GetComponent<EndScene>().winnersCount = winners.Count();
+		SceneManager.LoadScene("EndScene");
 	}
 
 	public void RestartGame()
