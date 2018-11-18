@@ -1847,6 +1847,8 @@ MonoBehaviour:
   moveSpeed: 12
   playerName: Player4
   playerColor: {r: 0, g: 1, b: 0.046100855, a: 0}
+  colorMats: []
+  colorRenders: []
   Babies: []
 --- !u!136 &136308341690136506
 CapsuleCollider:
