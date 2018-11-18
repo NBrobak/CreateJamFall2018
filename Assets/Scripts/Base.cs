@@ -9,8 +9,9 @@ public class Base : MonoBehaviour
     private float respawnTime = 2;
     [SerializeField]
     private int point = 0;
+    public AudioClip respawnSound;
     private List<FollowerBaby> BabyScoreVisuals;
-
+    private AudioSource audioSrc;
     private Player masterBaby;
 
 
@@ -40,7 +41,8 @@ public class Base : MonoBehaviour
 
     void Start()
     {
-        BabyScoreVisuals = new List<FollowerBaby>();
+        audioSrc = GetComponent<AudioSource>();
+            BabyScoreVisuals = new List<FollowerBaby>();
         spawnPointsVector3 = new List<Vector3>();
         Transform[] childTransforms = transform.Cast<Transform>().Where(c => c.gameObject.tag == "BaseSpawnPos").ToArray();
         for (int i = 0; i < childTransforms.Length; i++)
@@ -68,6 +70,10 @@ public class Base : MonoBehaviour
 
     public void Respawn()
     {
+        audioSrc.clip = respawnSound;
+        audioSrc.volume = .5f;
+        audioSrc.pitch = Random.Range(.8f, 1.2f);
+        audioSrc.Play();
         masterBaby.transform.position = transform.position;
         masterBaby.Life = Player.MAX_HEALTH;
         masterBaby.enabled = false;

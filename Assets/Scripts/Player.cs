@@ -40,8 +40,15 @@ public class Player : MonoBehaviour
     public GameObject deSpawnSmoke;
 	[SerializeField]
 	private Renderer healtIcon;
+    private AudioSource audioSrc;
+    public AudioClip throwSound;
+    public AudioClip shootSound;
+    public AudioClip damageSound;
+    public AudioClip explodeSound;
+    public AudioClip convertSound;
+    public AudioClip respawnSound;
 
-	//Player variables
+    //Player variables
     public float moveSpeed;
 	[SerializeField]
 	private string playerName;
@@ -111,6 +118,7 @@ public class Player : MonoBehaviour
 	// Use this for initialization
 	void Start()
     {
+        audioSrc = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         Babies = new List<FollowerBaby>();
         personalBase = GameObject.Find("Base" + PlayerName).GetComponent<Base>();
@@ -149,7 +157,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        animator.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal"))));
+        animator.SetFloat("Speed", (Mathf.Abs(moveX) + Mathf.Abs(moveY)));
     }
 
     public void ConvertBaby(GameObject preBaby)
@@ -160,6 +168,11 @@ public class Player : MonoBehaviour
         if (FollowBaby)
         {
             FollowBaby.SetDiaperColor(playerColor);
+
+            audioSrc.clip = convertSound;
+            audioSrc.pitch = Random.Range(.6f, 1.1f);
+            audioSrc.volume = .7f;
+            audioSrc.Play();
 
             Babies.Add(FollowBaby);
             Babies[Babies.Count - 1].transform.position = preBaby.transform.position;
@@ -200,6 +213,10 @@ public class Player : MonoBehaviour
 	{
 		DropBabies(damage);
 		Life -= damage;
+        audioSrc.clip = damageSound;
+        audioSrc.pitch = Random.Range(.9f, 1.1f);
+        audioSrc.volume = .5f;
+        audioSrc.Play();
 		Debug.Log(playerName + " health " + Life);
 	}
 
@@ -223,7 +240,11 @@ public class Player : MonoBehaviour
     }
     private void FireShot()
     {
-		bulletTimer = Time.timeSinceLevelLoad;
+        audioSrc.clip = shootSound;
+        audioSrc.pitch = Random.Range(1.1f, 1.5f);
+        audioSrc.volume = .5f;
+        audioSrc.Play();
+        bulletTimer = Time.timeSinceLevelLoad;
         // Create the Bullet from the Bullet Prefab
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 		// Add velocity to the bullet
@@ -246,8 +267,12 @@ public class Player : MonoBehaviour
     IEnumerator GreenBoom()
     {
         yield return new WaitForSeconds(1.8f);
+        audioSrc.clip = explodeSound;
+        audioSrc.pitch = Random.Range(.9f, 1.1f);
+        audioSrc.volume = .6f;
+        audioSrc.Play();
         GameObject temp2 = Instantiate(explisionParticleEffect, atheistGrenadeBaby.transform.position, atheistGrenadeBabyPrefab.transform.rotation);
-        Destroy(temp2, 4f) ;
+        Destroy(temp2, 4f);
     }
     IEnumerator SendChildGrenade()
     {
@@ -256,6 +281,7 @@ public class Player : MonoBehaviour
         if (despawnedChild)
         {
             GameObject despawnParticleEffect = Instantiate(deSpawnSmoke, despawnedChild.transform);
+
             despawnParticleEffect.transform.position = new Vector3(despawnParticleEffect.transform.position.x, 0f, despawnParticleEffect.transform.position.z);
             Destroy(despawnedChild.gameObject, 1f);
         }
@@ -268,6 +294,10 @@ public class Player : MonoBehaviour
             grenadeSpawn.position,
             grenadeSpawn.rotation);
         StartCoroutine(GreenBoom());
+        audioSrc.clip = throwSound;
+        audioSrc.pitch = Random.Range(.6f, .8f);
+        audioSrc.volume = 1f;
+        audioSrc.Play();
 
         // Add velocity to the baby
         atheistGrenadeBaby.GetComponent<Rigidbody>().velocity =

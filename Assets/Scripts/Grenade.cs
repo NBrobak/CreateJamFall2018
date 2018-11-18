@@ -10,15 +10,15 @@ public class Grenade : MonoBehaviour {
     public int damage = 2;
 
 	// Use this for initialization
-	void Start () {
-		StartCoroutine(Explode());
+	void Start () 
+    {
+        StartCoroutine(Explode());
 	}
 
     private IEnumerator Explode()
     {
 		yield return new WaitForSeconds(timer);
-
-		IEnumerable<Player> nearbyPlayers = 
+        IEnumerable<Player> nearbyPlayers = 
 			Physics.OverlapSphere(transform.position, explosionRadius)
 				.Where(c => c.CompareTag("Player"))
 				.Select(c => c.GetComponent<Player>());
