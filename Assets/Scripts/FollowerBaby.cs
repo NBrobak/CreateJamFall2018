@@ -13,11 +13,12 @@ public class FollowerBaby : MonoBehaviour
 	public Action onArrivalAtBase;
     public bool isMoving;
     public Renderer[] colChangeObjects;
-    private Animator animator;
+    public Animator animator;
+    public Material[] materials;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        
     }
 
     public Transform TargetTrans
@@ -68,9 +69,11 @@ public class FollowerBaby : MonoBehaviour
 
     public void SetDiaperColor(Color col)
     {
-        foreach (var item in colChangeObjects)
+        for (int i = 0; i < colChangeObjects.Length; i++)
         {
-            item.sharedMaterial.SetColor("Albedo", col);
+            Material mat = new Material(materials[i]);
+            mat.color = col;
+            colChangeObjects[i].material = mat;
         }
     }
 }
