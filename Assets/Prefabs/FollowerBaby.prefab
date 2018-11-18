@@ -922,7 +922,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1247842701553524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8157539, y: 29.876839, z: -11.044367}
+  m_LocalPosition: {x: -4.0964165, y: 5, z: -8.637996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4444237915424546}
@@ -1339,6 +1339,10 @@ MonoBehaviour:
   colChangeObjects:
   - {fileID: 137908697346176886}
   - {fileID: 137079072453657668}
+  animator: {fileID: 95048624494437904}
+  materials:
+  - {fileID: 2100000, guid: 2ed05a4cb63c1dc44bd63febceff61bf, type: 2}
+  - {fileID: 2100000, guid: 62c332bccf4a06a498d6d675aface476, type: 2}
 --- !u!137 &137079072453657668
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
