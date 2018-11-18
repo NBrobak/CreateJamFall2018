@@ -938,11 +938,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 114755432761511196, guid: cff13415754766a4db88b867f9f43c04,
-        type: 2}
-      propertyPath: fence
-      value: 
-      objectReference: {fileID: 1682762970}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cff13415754766a4db88b867f9f43c04, type: 2}
   m_IsPrefabAsset: 0
@@ -1125,11 +1120,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &1682762970 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4687310827424308, guid: cff13415754766a4db88b867f9f43c04,
-    type: 2}
-  m_PrefabInternal: {fileID: 1435863805}
 --- !u!1001 &1869914481
 Prefab:
   m_ObjectHideFlags: 0
