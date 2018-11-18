@@ -70,7 +70,7 @@ public class FollowerBaby : MonoBehaviour
     {
         foreach (var item in colChangeObjects)
         {
-            item.sharedMaterial.color = col;
+            item.sharedMaterial.SetColor("Albedo", col);
         }
     }
 }
