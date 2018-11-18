@@ -1711,10 +1711,12 @@ MonoBehaviour:
   deSpawnSmoke: {fileID: 1978526266617678, guid: d8797dff9bc39ad47a164250f3c4568b,
     type: 2}
   healtIcon: {fileID: 23685397514375180}
-  throwSound: {fileID: 8300000, guid: 90a27542d13f10d48927082dc397f476, type: 3}
+  throwSound: {fileID: 8300000, guid: 2868a319bb0c44a97ab0ab0f6bc1017f, type: 3}
+  shootSound: {fileID: 8300000, guid: 90a27542d13f10d48927082dc397f476, type: 3}
   damageSound: {fileID: 8300000, guid: a047e0f87f3766c4fa33f06fa1f2e540, type: 3}
   explodeSound: {fileID: 8300000, guid: e5e1f34656b9f93439ca946e797cc06f, type: 3}
   convertSound: {fileID: 8300000, guid: 02528fd8217e9084aa1d6e01ad17414e, type: 3}
+  respawnSound: {fileID: 8300000, guid: 9a83901ca96ae9841b866b521de8e528, type: 3}
   moveSpeed: 6
   playerName: Player3
   playerColor: {r: 1, g: 0.8934263, b: 0, a: 0}

@@ -171,7 +171,7 @@ public class Player : MonoBehaviour
 
             audioSrc.clip = convertSound;
             audioSrc.pitch = Random.Range(.6f, 1.1f);
-            audioSrc.volume = .7f;
+            audioSrc.volume = .3f;
             audioSrc.Play();
 
             Babies.Add(FollowBaby);
@@ -296,7 +296,7 @@ public class Player : MonoBehaviour
         StartCoroutine(GreenBoom());
         audioSrc.clip = throwSound;
         audioSrc.pitch = Random.Range(.6f, 1.4f);
-        audioSrc.volume = 1f;
+        audioSrc.volume = .6f;
         audioSrc.Play();
 
         // Add velocity to the baby

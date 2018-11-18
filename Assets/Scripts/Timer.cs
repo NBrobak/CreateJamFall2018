@@ -52,7 +52,7 @@ public class Timer : MonoBehaviour {
             {
                 doOnce = false;
                 audioSrc.clip = countDownSound;
-                audioSrc.volume = .6f;
+                audioSrc.volume = .1f;
                 audioSrc.Play();
             }
 			countDownTimerContent = gameTime - timePlayed;
